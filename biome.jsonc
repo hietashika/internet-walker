@@ -26,8 +26,6 @@
 		"formatter": {
 			"quoteStyle": "double"
 		},
-		"globals": [
-			"astro"
-		]
+		"globals": ["astro"]
 	}
 }

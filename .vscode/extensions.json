@@ -1,4 +1,8 @@
 {
-  "recommendations": ["astro-build.astro-vscode", "stylelint.vscode-stylelint", "biomejs.biome"],
-  "unwantedRecommendations": []
+	"recommendations": [
+		"astro-build.astro-vscode",
+		"stylelint.vscode-stylelint",
+		"biomejs.biome"
+	],
+	"unwantedRecommendations": []
 }
