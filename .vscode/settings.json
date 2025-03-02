@@ -1,0 +1,9 @@
+{
+  // stylelintの拡張機能の対象にするファイルの拡張子
+  "stylelint.validate": ["css", "scss", "html", "astro"],
+
+  // 保存時に自動で --fix するように
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": "explicit"
+  },
+}
