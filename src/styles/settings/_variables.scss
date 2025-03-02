@@ -10,16 +10,14 @@
 	--color-background-low: $white-low;
 }
 
-$primary-100: rgb(0 0 255 / 1);
+$primary-100: rgb(0 0 255 / 100%);
 
-
-$gray-high: rgb(0 0 0 / 0.87);
-$gray-middle: rgb(0 0 0 / 0.65);
-$gray-low: rgb(0 0 0 / 0.56);
-$gray-disabled: rgb(0 0 0 / 0.26);
-
-$white-high: rgb(255 255 255 / 1);
-$white-middle: rgb(255 255 255 / 0.91);
-$white-low: rgb(255 255 255 / 0.71);
-$white-disabled: rgb(255 255 255 / 0.26);
+$gray-high: rgb(0 0 0 / 87%);
+$gray-middle: rgb(0 0 0 / 65%);
+$gray-low: rgb(0 0 0 / 56%);
+$gray-disabled: rgb(0 0 0 / 26%);
+$white-high: rgb(255 255 255 / 100%);
+$white-middle: rgb(255 255 255 / 91%);
+$white-low: rgb(255 255 255 / 71%);
+$white-disabled: rgb(255 255 255 / 26%);
 
