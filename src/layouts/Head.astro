@@ -1,0 +1,12 @@
+---
+interface Props {
+	pageTitle: string;
+}
+
+const { pageTitle } = Astro.props;
+const siteTitle = "My Astro Site";
+---
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="generator" content={Astro.generator} />
+<title>{pageTitle} | {siteTitle}</title>
