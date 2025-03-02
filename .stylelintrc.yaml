@@ -1,0 +1,648 @@
+# StyleLintの設定ファイル
+# 複数のスタイルシート形式に対応し、コードの品質を維持するための設定です
+
+# 基本設定の継承
+extends:
+  - stylelint-config-standard-scss
+  - stylelint-config-html
+  - stylelint-config-html/astro
+
+# プラグイン設定
+plugins:
+  - stylelint-order
+
+# ルール設定
+rules:
+  # Astroの疑似クラス :global は指摘させない
+  selector-pseudo-class-no-unknown:
+    - true
+    - ignorePseudoClasses:
+        - global
+
+  # 擬似要素の表記統一（`::`）
+  selector-pseudo-element-colon-notation: double
+
+  # SCSSファイルの先頭アンダースコアを許可する（パーシャルファイルの命名規則）
+  scss/load-no-partial-leading-underscore: null
+
+  # 宣言前の空行
+  declaration-empty-line-before:
+    - always
+    - except:
+      - after-comment
+      - after-declaration
+      - first-nested
+    - ignore:
+      - inside-single-line-block
+
+  # プロパティの順番（use: stylelint-order）
+  # CSSの各モジュールに基づいた論理的な順序でプロパティを記述
+  order/properties-order:
+    -
+      # Cascading and Inheritance
+      - all
+
+      # Generated Content
+      - content
+      - quotes
+
+      # Positioned Layout
+      - position
+      - top
+      - right
+      - bottom
+      - left
+      - inset
+      - inset-block
+      - inset-inline
+      - inset-block-start
+      - inset-inline-start
+      - inset-block-end
+      - inset-inline-end
+      - z-index # (exception)
+
+      # Anchor Positioning
+      - anchor-name
+      - anchor-scope
+      - inset-area
+      - position-anchor
+      - position-try
+      - position-try-options
+      - position-try-order
+
+      # Containment Module
+      - container
+      - container-name
+      - container-type
+      - contain
+      - content-visibility
+
+      # Display
+      - display
+      - order
+      - visibility
+
+      # Grid Layout
+      - grid
+      - grid-template
+      - grid-template-columns
+      - grid-template-rows
+      - grid-template-areas
+      - grid-area
+      - grid-column
+      - grid-column-start
+      - grid-column-end
+      - grid-row
+      - grid-row-start
+      - grid-row-end
+      - grid-auto-columns
+      - grid-auto-rows
+      - grid-auto-flow
+
+      # Flexible Box
+      - flex
+      - flex-grow
+      - flex-shrink
+      - flex-basis
+      - flex-flow
+      - flex-direction
+      - flex-wrap
+
+      # Box Alignment Module
+      - gap
+      - column-gap
+      - row-gap
+      - place-content
+      - align-content
+      - justify-content
+      - place-items
+      - align-items
+      - justify-items
+      - place-self
+      - align-self
+      - justify-self
+
+      # Float
+      - float
+      - clear
+
+      # Multi-column Layout
+      - columns
+      - column-width
+      - column-count
+      - column-rule
+      - column-rule-width
+      - column-rule-style
+      - column-rule-color
+      - column-span
+      - column-fill
+
+      # Overflow
+      - overflow
+      - overflow-x
+      - overflow-y
+      - overflow-inline
+      - overflow-block
+      - text-overflow
+      - overflow-scrolling # (exception)
+
+      # Overscroll Behavior
+      - overscroll-behavior
+      - overscroll-behavior-x
+      - overscroll-behavior-y
+      - overscroll-behavior-inline
+      - overscroll-behavior-block
+
+      # Masking
+      - clip
+      - clip-path
+      - clip-rule
+      - mask
+      - mask-image
+      - mask-mode
+      - mask-repeat
+      - mask-position
+      - mask-clip
+      - mask-origin
+      - mask-size
+      - mask-composite
+      - mask-border
+      - mask-border-mode
+      - mask-border-outset
+      - mask-border-repeat
+      - mask-border-slice
+      - mask-border-source
+      - mask-border-width
+      - mask-type
+
+      # Box Sizing
+      - box-sizing
+      - width
+      - height
+      - min-width
+      - min-height
+      - max-width
+      - max-height
+      - inline-size
+      - block-size
+      - min-inline-size
+      - min-block-size
+      - max-inline-size
+      - max-block-size
+      - aspect-ratio
+      - contain-intrinsic-size
+      - contain-intrinsic-width
+      - contain-intrinsic-height
+      - contain-intrinsic-block-size
+      - contain-intrinsic-inline-size
+      # - min-intrinsic-sizing
+
+      # Box Model
+      - margin
+      - margin-top
+      - margin-right
+      - margin-bottom
+      - margin-left
+      - margin-block
+      - margin-block-start
+      - margin-block-end
+      - margin-inline
+      - margin-inline-start
+      - margin-inline-end
+      - padding
+      - padding-top
+      - padding-right
+      - padding-bottom
+      - padding-left
+      - padding-block
+      - padding-block-start
+      - padding-block-end
+      - padding-inline
+      - padding-inline-start
+      - padding-inline-end
+
+      # Backgrounds and Borders (border)
+      - border
+      - border-width
+      - border-style
+      - border-color
+      - border-top
+      - border-top-width
+      - border-top-style
+      - border-top-color
+      - border-right
+      - border-right-width
+      - border-right-style
+      - border-right-color
+      - border-bottom
+      - border-bottom-width
+      - border-bottom-style
+      - border-bottom-color
+      - border-left
+      - border-left-width
+      - border-left-style
+      - border-left-color
+      - border-block
+      - border-block-width
+      - border-block-style
+      - border-block-color
+      - border-block-start
+      - border-block-start-width
+      - border-block-start-style
+      - border-block-start-color
+      - border-block-end
+      - border-block-end-width
+      - border-block-end-style
+      - border-block-end-color
+      - border-inline
+      - border-inline-width
+      - border-inline-style
+      - border-inline-color
+      - border-inline-start
+      - border-inline-start-width
+      - border-inline-start-style
+      - border-inline-start-color
+      - border-inline-end
+      - border-inline-end-width
+      - border-inline-end-style
+      - border-inline-end-color
+      - border-radius
+      - border-top-left-radius
+      - border-top-right-radius
+      - border-bottom-right-radius
+      - border-bottom-left-radius
+      - border-start-start-radius
+      - border-start-end-radius
+      - border-end-end-radius
+      - border-end-start-radius
+      - border-image
+      - border-image-source
+      - border-image-slice
+      - border-image-width
+      - border-image-outset
+      - border-image-repeat
+      - box-shadow
+
+      # Shapes
+      - shape-image-threshold
+      - shape-margin
+      - shape-outside
+
+      # Images
+      - object-fit
+      - object-position
+      - image-rendering
+      # - image-orientation
+      # - image-resolution
+
+      # Lists and Counters
+      - list-style
+      - list-style-position
+      - list-style-type
+      - list-style-image
+      - counter-reset
+      - counter-increment
+      - counter-set
+      # - marker-side
+
+      # Tables
+      - table-layout
+      - caption-side
+      - empty-cells
+      - border-collapse
+      - border-spacing
+
+      # Color Adjustment
+      - color-scheme
+      # - color-adjust
+      # - forced-color-adjust
+      # - print-color-adjust
+
+      # Backgrounds and Borders (background)
+      - background
+      - background-image
+      - background-position
+      - background-position-x
+      - background-position-y
+      - background-size
+      - background-repeat
+      - background-origin
+      - background-clip
+      - background-attachment
+      - background-color
+
+      # Color
+      - color
+      - opacity
+      # - rendering-intent
+      # - components
+
+      # Compositing and Blending
+      - mix-blend-mode
+      - isolation
+      - background-blend-mode
+
+      # Fragmentation
+      - box-decoration-break
+      # - break-before
+      # - break-inside
+      # - break-after
+      # - orphans
+      # - widows
+
+      # Writing Modes
+      - writing-mode
+      - direction
+      - unicode-bidi
+      - text-orientation
+      - text-combine-upright
+      # - glyph-orientation-vertical
+
+      # Fonts
+      - font
+      - font-family
+      - src
+      - unicode-range
+      - font-feature-settings
+      - font-variation-settings
+      - font-named-instance
+      - font-size
+      - font-size-adjust
+      - font-synthesis
+      - font-synthesis-weight
+      - font-synthesis-style
+      - font-style
+      - font-weight
+      - font-stretch
+      - font-kerning
+      - font-variant
+      - font-variant-ligatures
+      - font-variant-position
+      - font-variant-caps
+      - font-variant-numeric
+      - font-variant-east-asian
+      - font-display
+      - font-palette
+      # - font-language-override
+      # - font-optical-sizing
+      # - font-synthesis-small-caps
+      # - font-variant-alternates
+      # - font-variant-emoji
+      # - line-padding
+      # - ascent-override
+      # - descent-override
+      # - line-gap-override
+      # - base-palette
+      # - override-colors
+
+      # Inline Layouts
+      - line-height
+      - vertical-align
+      # - baseline-source
+      # - alignment-baseline
+      # - baseline-shift
+      # - dominant-baseline
+      # - text-box-edge
+      # - text-box-trim
+      # - inline-sizing
+      # - initial-letter
+      # - initial-letter-align
+      # - initial-letter-wrap
+
+      # Text Module
+      - letter-spacing
+      - text-align
+      - text-align-last
+      - text-indent
+      - text-justify
+      - text-transform
+      - text-wrap
+      - text-wrap-mode
+      - text-spacing
+      - text-spacing-trim
+      - text-autospace
+      - white-space
+      - white-space-collapse
+      - word-spacing
+      - word-break
+      - line-break
+      - overflow-wrap
+      - word-wrap
+      - hyphens
+      - text-size-adjust # (exception)
+      # - hyphenate-character
+      # - hyphenate-limit-zone
+      # - hyphenate-limit-chars
+      # - hyphenate-limit-lines
+      # - hyphenate-limit-last
+      # - text-align-all
+      # - text-group-align
+      # - text-wrap-style
+      # - white-space-trim
+      # - word-space-transform
+      # - wrap-inside
+      # - wrap-before
+      # - wrap-after
+      # - tab-size
+      # - hanging-punctuation
+
+      # Text Decoration
+      - text-decoration
+      - text-decoration-line
+      - text-decoration-style
+      - text-decoration-color
+      - text-decoration-thickness
+      - text-underline-offset
+      - text-underline-position
+      - text-emphasis
+      - text-emphasis-style
+      - text-emphasis-color
+      - text-emphasis-position
+      - text-shadow
+      - text-stroke # (exception)
+      - paint-order # (exception)
+
+      # Ruby Annotation Layout
+      - ruby-position
+      # - ruby-merge
+      - ruby-align
+      # - ruby-overhang
+
+      # Filter Effects
+      - filter
+      - flood-color
+      - flood-opacity
+      - color-interpolation-filters
+      - lighting-color
+
+      # SVG's Presentation (partial)
+      - fill
+      - fill-opacity
+      - fill-rule
+      - stroke
+      - stroke-dasharray
+      - stroke-dashoffset
+      - stroke-linecap
+      - stroke-linejoin
+      - stroke-miterlimit
+      - stroke-opacity
+      - stroke-width
+
+      # Scroll Snap
+      - scroll-snap-type
+      - scroll-margin
+      - scroll-margin-top
+      - scroll-margin-right
+      - scroll-margin-bottom
+      - scroll-margin-left
+      - scroll-margin-block
+      - scroll-margin-block-start
+      - scroll-margin-block-end
+      - scroll-margin-inline
+      - scroll-margin-inline-start
+      - scroll-margin-inline-end
+      - scroll-padding
+      - scroll-padding-top
+      - scroll-padding-right
+      - scroll-padding-bottom
+      - scroll-padding-left
+      - scroll-padding-block
+      - scroll-padding-block-start
+      - scroll-padding-block-end
+      - scroll-padding-inline
+      - scroll-padding-inline-start
+      - scroll-padding-inline-end
+      - scroll-snap-align
+      - scroll-snap-stop
+      - scroll-behavior # (exception)
+
+      # Scrollbars Styling
+      - scrollbar-color
+      - scrollbar-width
+      - scrollbar-gutter # (exception)
+
+      # Basic User Interface
+      - accent-color
+      - appearance
+      - cursor
+      - field-sizing
+      - outline
+      - outline-color
+      - outline-offset
+      - outline-style
+      - outline-width
+      - pointer-events
+      - resize
+      - user-select
+      - touch-action # (exception)
+      # - caret
+      # - caret-color
+      # - caret-shape
+      # - input-security
+      # - nav-up
+      # - nav-right
+      # - nav-down
+      # - nav-left
+
+      # Motion Path
+      - offset
+      - offset-position
+      - offset-path
+      - offset-distance
+      - offset-rotate
+      - offset-anchor
+
+      # Viewport
+      - zoom
+
+      # Transforms
+      - transform
+      - transform-origin
+      - transform-box
+      - transform-style
+      - perspective
+      - perspective-origin
+      - backface-visibility
+      - translate
+      - rotate
+      - scale
+
+      # Will Change
+      - will-change
+
+      # Transitions
+      - transition
+      - transition-delay
+      - transition-duration
+      - transition-property
+      - transition-timing-function
+      - transition-behavior
+
+      # Animations
+      - animation
+      - animation-name
+      - animation-duration
+      - animation-timing-function
+      - animation-delay
+      - animation-iteration-count
+      - animation-direction
+      - animation-fill-mode
+      - animation-play-state
+      - animation-composition
+      - animation-timeline
+
+      # Scroll-driven Animations
+      - animation-range
+      - animation-range-start
+      - animation-range-end
+      - scroll-timeline
+      - scroll-timeline-name
+      - scroll-timeline-axis
+      - view-timeline
+      - view-timeline-name
+      - view-timeline-axis
+      - view-timeline-inset
+      - timeline-scope
+
+      # View Transitions Module
+      - view-transition-name
+
+      # Speech
+      # - speak
+      # - speak-as
+      # - voice-balance
+      # - voice-duration
+      # - voice-family
+      # - voice-pitch
+      # - voice-range
+      # - voice-rate
+      # - voice-stress
+      # - voice-volume
+      # - cue
+      # - cue-after
+      # - cue-before
+      # - pause
+      # - pause-after
+      # - pause-before
+      # - rest
+      # - rest-after
+      # - rest-before
+
+      # Counter Styles
+      # - system
+      # - negative
+      # - prefix
+      # - suffix
+      # - range
+      # - pad
+      # - fallback
+      # - symbols
+      # - additive-symbols
+
+# オーバーライド設定
+overrides:
+  # *.astroファイルのカスタムプロパティは指摘させない
+  - files:
+      - "*.astro"
+    rules:
+      custom-property-pattern: null 
