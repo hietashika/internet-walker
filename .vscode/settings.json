@@ -4,6 +4,14 @@
 
   // 保存時に自動で --fix するように
   "editor.codeActionsOnSave": {
-    "source.fixAll.stylelint": "explicit"
+    "source.fixAll.stylelint": "explicit",
+    "source.organizeImports.biome": "explicit",
+    
+    "quickfix.biome": "explicit",
   },
+  // 保存時に自動でフォーマットするように
+  "editor.formatOnSave": true,
+  // フォーマッターのデフォルトのフォーマッターをbiomeにする
+  "editor.defaultFormatter": "biomejs.biome",
+  
 }
