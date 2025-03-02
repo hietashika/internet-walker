@@ -1,0 +1,11 @@
+// ITCSSに沿った命名規則
+@layer settings, tools, generic, elements, objects, components, utilities;
+// 変数の読み込み
+@import url("./settings/_variables.scss") layer(settings);
+
+// リセットCSSの読み込み
+@import url("./generic/_reset.css") layer(generic);
+
+// ベーススタイルの読み込み
+@import url("./elements/_base.scss") layer(elements);
+
