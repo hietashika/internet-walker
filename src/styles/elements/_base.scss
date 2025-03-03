@@ -1,3 +1,54 @@
 body {
   font-family: "BIZ UDGothic", serif;
 }
+
+// テキストの最大幅
+p, h1, h2, h3, h4, h5, h6, ul, ol {
+  max-inline-size: var(--max-inline-size);
+}
+
+// 見出し
+h1 {
+  // 24px 〜 32px
+  font-size: clamp(1.5rem, calc(1.5rem + 1vw), 2rem);
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+h2 {
+  // 20px 〜 24px
+  font-size: clamp(1.25rem, calc(1.25rem + 1vw), 1.5rem);
+    font-weight: bold;
+  line-height: 1.5;
+}
+
+h3 {
+  // 18px 〜 20px
+  font-size: clamp(1.125rem, calc(1.125rem + 1vw), 1.25rem);
+  font-weight: bold;
+  line-height: 1.5;
+
+}
+
+h4 {
+  // 16px 〜 18px
+  font-size: clamp(1rem, calc(1rem + 1vw), 1.125rem);
+  line-height: 1.5;
+}
+
+// テキスト
+p {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+// リスト
+ul {
+  list-style: disc;
+}
+
+ol {
+  list-style: decimal;
+}
+
+

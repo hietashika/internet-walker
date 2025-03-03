@@ -1,5 +1,6 @@
 // 変数の読み込み
 :root {
+	// Color
 	--color-primary: $primary-100;
 	--color-text-high: $gray-high;
 	--color-text-middle: $gray-middle;
@@ -8,7 +9,11 @@
 	--color-background-high: $white-high;
 	--color-background-middle: $white-middle;
 	--color-background-low: $white-low;
+
+	// 文字の最大幅
+	--max-inline-size: 48rem;
 }
+
 
 $primary-100: rgb(0 0 255 / 100%);
 $gray-high: rgb(0 0 0 / 87%);
