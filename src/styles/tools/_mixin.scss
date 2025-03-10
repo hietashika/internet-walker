@@ -1,7 +1,34 @@
-@mixin flex {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+// スペーシングシステム
+@mixin space-variables {
+  // 正の値
+  &:global([gap="0"]) { --space: 0; }
+  &:global([gap="1"]) { --space: var(--ratio); }
+  &:global([gap="2"]) { --space: calc(var(--ratio) * 2); }
+  &:global([gap="3"]) { --space: calc(var(--ratio) * 3); }
+  &:global([gap="4"]) { --space: calc(var(--ratio) * 4); }
+  &:global([gap="5"]) { --space: calc(var(--ratio) * 5); }
+
+
+  // 負の値（縮小）
+  &:global([gap="-1"]) { --space: calc(var(--ratio) / 2); }
+  &:global([gap="-2"]) { --space: calc(var(--ratio) / 3); }
+  &:global([gap="-3"]) { --space: calc(var(--ratio) / 4); }
+  &:global([gap="-4"]) { --space: calc(var(--ratio) / 5); }
 }
 
+// 親子関係のスタイルルール（入れ子のコンポーネント用）
+@mixin nested-space-variables {
+  // 正の値
+  :global(.stack[gap="0"] > .stack) { margin-block-start: 0 !important; }
+  :global(.stack[gap="1"] > .stack) { margin-block-start: var(--ratio) !important; }
+  :global(.stack[gap="2"] > .stack) { margin-block-start: calc(var(--ratio) * 2) !important; }
+  :global(.stack[gap="3"] > .stack) { margin-block-start: calc(var(--ratio) * 3) !important; }
+  :global(.stack[gap="4"] > .stack) { margin-block-start: calc(var(--ratio) * 4) !important; }
+  :global(.stack[gap="5"] > .stack) { margin-block-start: calc(var(--ratio) * 5) !important; }
+
+  // 負の値（縮小）
+  :global(.stack[gap="-1"] > .stack) { margin-block-start: calc(var(--ratio) / 2) !important; }
+  :global(.stack[gap="-2"] > .stack) { margin-block-start: calc(var(--ratio) / 3) !important; }
+  :global(.stack[gap="-3"] > .stack) { margin-block-start: calc(var(--ratio) / 4) !important; }
+  :global(.stack[gap="-4"] > .stack) { margin-block-start: calc(var(--ratio) / 5) !important; }
+}

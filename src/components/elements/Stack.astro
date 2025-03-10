@@ -1,0 +1,52 @@
+---
+interface Props {
+  class?: string;
+  Element?: keyof HTMLElementTagNameMap;
+  gap?: string | number;
+}
+
+const { class: className, Element = "div", gap, ...rest }: Props = Astro.props;
+---
+
+<Element
+  class:list={["stack", className]}
+  {...gap ? { gap } : {}}
+  data-stack
+  {...rest}
+>
+  <slot />
+</Element>
+
+<style lang="scss">
+  @use "../../styles/tools/mixin" as *;
+
+  /* Stackコンポーネントに適用するスタイル */
+  .stack {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    /* 
+      特別なスタイリングルール：
+      1. 子要素間の間隔設定
+      2. 子Stackには親のgap値を使用
+    */
+
+    /* 1. 子要素間のマージン設定 */
+    > :global(*) + :global(*) {
+      margin-block-start: var(--space, 1rem);
+    }
+
+    /* 2. gap属性を持つ場合、デフォルト値を設定 */
+    &:global([gap]) {
+      --space: 1rem; /* デフォルト値 */
+    }
+
+    /* 3. スペーシングシステムを適用 - 実際のマージン値を計算 */
+    @include space-variables;
+  }
+
+  /* 複数階層のネストにも対応するスタイル適用 */
+  @include nested-space-variables;
+</style>
