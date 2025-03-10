@@ -1,19 +1,14 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import Stack from "@elements/Stack.astro";
+import Box from "@elements/Box.astro";
 ---
 
 <Layout pageTitle="Test">
-  <Stack gap="2">
+  <Box>
     <h1>ヘッドライン</h1>
     <p>テキスト</p>
-    <Stack gap="5">
-      <h2>サブタイトル</h2>
-      <p>テキスト</p>
-      <Stack gap="-2">
-        <h3>小タイトル</h3>
-        <p>テキスト</p>
-      </Stack>
-    </Stack>
-  </Stack>
+  </Box>
 </Layout>
+
+<style lang="scss">
+</style>
