@@ -5,13 +5,18 @@ body {
 // テキストの最大幅
 p, h1, h2, h3, h4, h5, h6, ul, ol {
   max-inline-size: var(--max-inline-size);
+  margin-block: var(--leading-trim);
 }
 
 // 見出し
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: pretty;
+  word-break: auto-phrase;
+}
+
 h1 {
   // 24px 〜 32px
   font-size: clamp(1.5rem, calc(1.5rem + 1vw), 2rem);
-  font-weight: bold;
   line-height: 1.5;
 }
 

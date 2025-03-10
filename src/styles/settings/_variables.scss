@@ -12,6 +12,9 @@
 
 	// 文字の最大幅
 	--max-inline-size: 48rem;
+
+	// 行間の調整
+	--leading-trim: calc((1em - 1lh) / 2);
 }
 
 
