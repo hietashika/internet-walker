@@ -1,26 +1,43 @@
 ---
+import { getSpacingClasses } from "../../utils/spacing";
+
 interface Props {
+  padding?: string;
+  margin?: string;
   class?: string;
   Element?: keyof HTMLElementTagNameMap;
 }
 
-const { class: className, Element = "div", ...rest }: Props = Astro.props;
+const {
+  padding,
+  margin,
+  class: className,
+  Element = "div",
+  ...rest
+} = Astro.props;
+const spacingClasses = getSpacingClasses({ padding, margin });
 ---
 
-<Element class:list={["box", className]} {...rest}>
+<Element class:list={["box", ...spacingClasses, className]} {...rest}>
   <slot />
 </Element>
 
 <style lang="scss">
+  @use "../../styles/tools/mixin" as mix;
+
   .box {
     --color-background: var(--color-text-low);
     --color-text: var(--color-text-high);
 
-    padding: 1rem;
+    margin: var(--box-margin, 0);
+    padding: var(--box-padding, var(--space-m));
     background-color: var(--color-background);
     color: var(--color-text);
     outline: 0.125rem solid transparent;
     outline-offset: -0.125rem;
+
+    @include mix.spacing-classes("--box-padding", "padding");
+    @include mix.spacing-classes("--box-margin", "margin");
 
     :global(*) {
       color: inherit;
