@@ -2,18 +2,25 @@
 import Layout from "@layouts/Layout.astro";
 import Box from "@elements/Box.astro";
 import Stack from "@elements/Stack.astro";
+import Center from "@elements/Center.astro";
+import Sidebar from "@elements/Sidebar.astro";
 ---
 
 <Layout pageTitle="Test">
-  <Box padding="1" surface="tertiary">
-    <Stack gap="2">
-      <h1>ヘッドライン</h1>
-      <p>テキスト</p>
-      <Stack gap="1">
-        <h2>ヘッドライン</h2>
-        <p>テキスト</p>
-      </Stack>
-    </Stack>
-  </Box>
+  <Center>
+    <Sidebar gap="3" side="left" min="30%" width="20rem">
+      <Box padding="1" surface="tertiary">
+        <Stack gap="2">
+          <h1>ヘッドライン</h1>
+          <p>テキスト</p>
+        </Stack>
+      </Box>
+      <Box padding="1" surface="tertiary">
+        <Stack gap="2">
+          <h2>サイドバー</h2>
+          <p>テキスト</p>
+        </Stack>
+      </Box>
+    </Sidebar>
+  </Center>
 </Layout>
-
