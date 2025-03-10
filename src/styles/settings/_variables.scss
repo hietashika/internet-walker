@@ -1,13 +1,24 @@
-// 変数の読み込み
+// 変数の定義
+$primary-100: rgb(0 0 255 / 100%);
+$gray-high: rgb(0 0 0 / 87%);
+$gray-middle: rgb(0 0 0 / 65%);
+$gray-low: rgb(0 0 0 / 56%);
+$gray-disabled: rgb(0 0 0 / 26%);
+$white-high: rgb(255 255 255 / 100%);
+$white-middle: rgb(255 255 255 / 91%);
+$white-low: rgb(255 255 255 / 71%);
+$white-disabled: rgb(255 255 255 / 26%);
+
+// カスタムプロパティの設定
 :root {
 	// Color
-	--color-primary: $primary-100;
-	--color-text-high: $gray-high;
-	--color-text-middle: $gray-middle;
-	--color-text-low: $gray-low;
-	--color-text-disabled: $gray-disabled;
-	--color-background-high: $white-high;
-	--color-background-middle: $white-middle;
+	--color-primary: #{$primary-100};
+	--color-text-high: #{$gray-high};
+	--color-text-middle: #{$gray-middle};
+	--color-text-low: #{$gray-low};
+	--color-text-disabled: #{$gray-disabled};
+	--color-background-high: #{$white-high};
+	--color-background-middle: #{$white-middle};
 	--color-background-low: $white-low;
 
 	// 文字の最大幅
@@ -19,15 +30,4 @@
 	// 余白
 	--ratio: 1.5rem;
 }
-
-
-$primary-100: rgb(0 0 255 / 100%);
-$gray-high: rgb(0 0 0 / 87%);
-$gray-middle: rgb(0 0 0 / 65%);
-$gray-low: rgb(0 0 0 / 56%);
-$gray-disabled: rgb(0 0 0 / 26%);
-$white-high: rgb(255 255 255 / 100%);
-$white-middle: rgb(255 255 255 / 91%);
-$white-low: rgb(255 255 255 / 71%);
-$white-disabled: rgb(255 255 255 / 26%);
 
