@@ -1,4 +1,10 @@
 ---
+/**
+ * Boxコンポーネント
+ *
+ * コンテンツを囲むための基本的なコンテナコンポーネント
+ * padding、margin、背景色などを制御可能
+ */
 import { getSpacingClasses } from "../../utils/spacing";
 
 interface Props {
@@ -6,6 +12,18 @@ interface Props {
   margin?: string;
   class?: string;
   Element?: keyof HTMLElementTagNameMap;
+  /**
+   * 背景色の種類を指定
+   * - primary: 高コントラスト背景色
+   * - middle: 中程度コントラスト背景色
+   * - low: 低コントラスト背景色
+   */
+  surface?: "primary" | "secondary" | "tertiary";
+
+  /**
+   * その他の属性を許可
+   */
+  [key: string]: any;
 }
 
 const {
@@ -13,34 +31,57 @@ const {
   margin,
   class: className,
   Element = "div",
+  surface,
   ...rest
 } = Astro.props;
+
+// スペーシングクラスを生成
 const spacingClasses = getSpacingClasses({ padding, margin });
+
+// サーフェスクラスを生成（存在する場合のみ）
+const surfaceClass = surface
+  ? `box--surface${surface.charAt(0).toUpperCase() + surface.slice(1)}`
+  : "";
 ---
 
-<Element class:list={["box", ...spacingClasses, className]} {...rest}>
+<Element
+  class:list={["box", ...spacingClasses, surfaceClass, className]}
+  {...rest}
+>
   <slot />
 </Element>
 
 <style lang="scss">
   @use "../../styles/tools/mixin" as mix;
 
+  /**
+   * Boxコンポーネントのスタイル
+   */
   .box {
-    --color-background: var(--color-text-low);
-    --color-text: var(--color-text-high);
-
     margin: var(--box-margin, 0);
     padding: var(--box-padding, var(--space-m));
-    background-color: var(--color-background);
-    color: var(--color-text);
+    background-color: transparent;
     outline: 0.125rem solid transparent;
     outline-offset: -0.125rem;
 
+    /* スペーシングクラスの適用 */
     @include mix.spacing-classes("--box-padding", "padding");
     @include mix.spacing-classes("--box-margin", "margin");
 
-    :global(*) {
-      color: inherit;
+    /**
+     * サーフェスバリエーション
+     * 異なる背景色を提供するモディファイア
+     */
+    &--surfacePrimary {
+      background-color: var(--color-background-high);
+    }
+
+    &--surfaceSecondary {
+      background-color: var(--color-background-middle);
+    }
+
+    &--surfaceTertiary {
+      background-color: var(--color-background-low);
     }
   }
 </style>
