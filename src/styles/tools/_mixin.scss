@@ -1,34 +1,79 @@
 // スペーシングシステム
 @mixin space-variables {
-  // 正の値
-  &:global([gap="0"]) { --space: 0; }
-  &:global([gap="1"]) { --space: var(--ratio); }
-  &:global([gap="2"]) { --space: calc(var(--ratio) * 2); }
-  &:global([gap="3"]) { --space: calc(var(--ratio) * 3); }
-  &:global([gap="4"]) { --space: calc(var(--ratio) * 4); }
-  &:global([gap="5"]) { --space: calc(var(--ratio) * 5); }
-
-
-  // 負の値（縮小）
-  &:global([gap="-1"]) { --space: calc(var(--ratio) / 2); }
-  &:global([gap="-2"]) { --space: calc(var(--ratio) / 3); }
-  &:global([gap="-3"]) { --space: calc(var(--ratio) / 4); }
-  &:global([gap="-4"]) { --space: calc(var(--ratio) / 5); }
+  // 非常に小さいスペース
+  &:global([gap="-3"]) { --space: var(--space-3xs); } // 4px
+  &:global([gap="-2"]) { --space: var(--space-2xs); } // 8px
+  &:global([gap="-1"]) { --space: var(--space-xs); } // 12px
+  
+  // 基本的なスペース
+  &:global([gap="0"]) { --space: 0; } // スペースなし
+  &:global([gap="1"]) { --space: var(--space-m); } // 16px - 基準サイズ
+  &:global([gap="2"]) { --space: var(--space-l); } // 24px
+  &:global([gap="3"]) { --space: var(--space-xl); } // 32px
+  
+  // 大きいスペース
+  &:global([gap="4"]) { --space: var(--space-2xl); } // 48px
+  &:global([gap="5"]) { --space: var(--space-3xl); } // 64px
+  &:global([gap="6"]) { --space: var(--space-4xl); } // 96px
+  &:global([gap="7"]) { --space: var(--space-5xl); } // 128px
+  
+  // 非常に大きいスペース
+  &:global([gap="8"]) { --space: var(--space-6xl); } // 192px
+  &:global([gap="9"]) { --space: var(--space-7xl); } // 256px
+  &:global([gap="10"]) { --space: var(--space-8xl); } // 384px
 }
 
 // 親子関係のスタイルルール（入れ子のコンポーネント用）
 @mixin nested-space-variables {
-  // 正の値
-  :global(.stack[gap="0"] > .stack) { margin-block-start: 0 !important; }
-  :global(.stack[gap="1"] > .stack) { margin-block-start: var(--ratio) !important; }
-  :global(.stack[gap="2"] > .stack) { margin-block-start: calc(var(--ratio) * 2) !important; }
-  :global(.stack[gap="3"] > .stack) { margin-block-start: calc(var(--ratio) * 3) !important; }
-  :global(.stack[gap="4"] > .stack) { margin-block-start: calc(var(--ratio) * 4) !important; }
-  :global(.stack[gap="5"] > .stack) { margin-block-start: calc(var(--ratio) * 5) !important; }
+  // 非常に小さいスペース
+  :global(.stack[gap="-3"] > .stack) { margin-block-start: var(--space-3xs) !important; } // 4px
+  :global(.stack[gap="-2"] > .stack) { margin-block-start: var(--space-2xs) !important; } // 8px
+  :global(.stack[gap="-1"] > .stack) { margin-block-start: var(--space-xs) !important; } // 12px
+  
+  // 基本的なスペース
+  :global(.stack[gap="0"] > .stack) { margin-block-start: 0 !important; } // スペースなし
+  :global(.stack[gap="1"] > .stack) { margin-block-start: var(--space-m) !important; } // 16px - 基準サイズ
+  :global(.stack[gap="2"] > .stack) { margin-block-start: var(--space-l) !important; } // 24px
+  :global(.stack[gap="3"] > .stack) { margin-block-start: var(--space-xl) !important; } // 32px
+  
+  // 大きいスペース
+  :global(.stack[gap="4"] > .stack) { margin-block-start: var(--space-2xl) !important; } // 48px
+  :global(.stack[gap="5"] > .stack) { margin-block-start: var(--space-3xl) !important; } // 64px
+  :global(.stack[gap="6"] > .stack) { margin-block-start: var(--space-4xl) !important; } // 96px
+  :global(.stack[gap="7"] > .stack) { margin-block-start: var(--space-5xl) !important; } // 128px
+  
+  // 非常に大きいスペース
+  :global(.stack[gap="8"] > .stack) { margin-block-start: var(--space-6xl) !important; } // 192px
+  :global(.stack[gap="9"] > .stack) { margin-block-start: var(--space-7xl) !important; } // 256px
+  :global(.stack[gap="10"] > .stack) { margin-block-start: var(--space-8xl) !important; } // 384px
+}
 
-  // 負の値（縮小）
-  :global(.stack[gap="-1"] > .stack) { margin-block-start: calc(var(--ratio) / 2) !important; }
-  :global(.stack[gap="-2"] > .stack) { margin-block-start: calc(var(--ratio) / 3) !important; }
-  :global(.stack[gap="-3"] > .stack) { margin-block-start: calc(var(--ratio) / 4) !important; }
-  :global(.stack[gap="-4"] > .stack) { margin-block-start: calc(var(--ratio) / 5) !important; }
+// コンポーネントのスペーシング制御用ミックスイン
+// $property: 制御するCSSプロパティ名（例：--center-padding, --stack-gap）
+// $prefix: クラスのプレフィックス（例：padding, gap）
+// $selector: 追加のセレクタ（デフォルトは空）
+@mixin spacing-classes($property, $prefix, $selector: '') {
+  $selector-text: if($selector != '', '#{$selector}', '');
+  
+  // 非常に小さいスペース
+  &.#{$prefix}-neg-3#{$selector-text} { #{$property}: var(--space-3xs); } // 4px
+  &.#{$prefix}-neg-2#{$selector-text} { #{$property}: var(--space-2xs); } // 8px
+  &.#{$prefix}-neg-1#{$selector-text} { #{$property}: var(--space-xs); } // 12px
+  
+  // 基本的なスペース
+  &.#{$prefix}-0#{$selector-text} { #{$property}: 0; } // スペースなし
+  &.#{$prefix}-1#{$selector-text} { #{$property}: var(--space-m); } // 16px - 基準サイズ
+  &.#{$prefix}-2#{$selector-text} { #{$property}: var(--space-l); } // 24px
+  &.#{$prefix}-3#{$selector-text} { #{$property}: var(--space-xl); } // 32px
+  
+  // 大きいスペース
+  &.#{$prefix}-4#{$selector-text} { #{$property}: var(--space-2xl); } // 48px
+  &.#{$prefix}-5#{$selector-text} { #{$property}: var(--space-3xl); } // 64px
+  &.#{$prefix}-6#{$selector-text} { #{$property}: var(--space-4xl); } // 96px
+  &.#{$prefix}-7#{$selector-text} { #{$property}: var(--space-5xl); } // 128px
+  
+  // 非常に大きいスペース
+  &.#{$prefix}-8#{$selector-text} { #{$property}: var(--space-6xl); } // 192px
+  &.#{$prefix}-9#{$selector-text} { #{$property}: var(--space-7xl); } // 256px
+  &.#{$prefix}-10#{$selector-text} { #{$property}: var(--space-8xl); } // 384px
 }

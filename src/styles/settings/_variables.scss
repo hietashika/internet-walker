@@ -21,13 +21,61 @@ $white-disabled: rgb(255 255 255 / 26%);
 	--color-background-middle: #{$white-middle};
 	--color-background-low: $white-low;
 
+	// フォントサイズ
+	--font-size-base: 1rem; // 16px - 基準サイズ
+	
+	// 小さいフォントサイズ（12px〜14px）
+	--font-size-xs: calc(var(--font-size-base) * 0.75); // 12px
+	--font-size-s: calc(var(--font-size-base) * 0.875); // 14px
+	
+	// 基本〜中サイズフォント（16px〜20px）
+	--font-size-m: var(--font-size-base); // 16px
+	--font-size-l: calc(var(--font-size-base) * 1.125); // 18px
+	--font-size-xl: calc(var(--font-size-base) * 1.25); // 20px
+	
+	// 大きいフォントサイズ（24px〜36px）
+	--font-size-2xl: calc(var(--font-size-base) * 1.5); // 24px
+	--font-size-3xl: calc(var(--font-size-base) * 1.875); // 30px
+	--font-size-4xl: calc(var(--font-size-base) * 2.25); // 36px
+	
+	// 見出し・タイトル用フォントサイズ（48px〜72px）
+	--font-size-5xl: calc(var(--font-size-base) * 3); // 48px
+	--font-size-6xl: calc(var(--font-size-base) * 3.75); // 60px
+	--font-size-7xl: calc(var(--font-size-base) * 4.5); // 72px
+
 	// 文字の最大幅
 	--max-inline-size: 48rem;
 
 	// 行間の調整
 	--leading-trim: calc((1em - 1lh) / 2);
 
-	// 余白
-	--ratio: 1.5rem;
+	// 余白の基本単位
+	--space-base: 1rem; // 16px - 基準サイズ
+	
+	// 余白変数（8ポイントグリッドシステムに基づく）
+	
+	// 非常に小さいスペース（4px〜12px）
+	--space-3xs: calc(var(--space-base) * 0.25); // 4px
+	--space-2xs: calc(var(--space-base) * 0.5); // 8px
+	--space-xs: calc(var(--space-base) * 0.75); // 12px
+	
+	// 基本的なスペース（16px〜32px）
+	--space-m: var(--space-base); // 16px - 基準サイズ
+	--space-l: calc(var(--space-base) * 1.5); // 24px
+	--space-xl: calc(var(--space-base) * 2); // 32px
+	
+	// 大きいスペース（48px〜128px）
+	--space-2xl: calc(var(--space-base) * 3); // 48px
+	--space-3xl: calc(var(--space-base) * 4); // 64px
+	--space-4xl: calc(var(--space-base) * 6); // 96px
+	--space-5xl: calc(var(--space-base) * 8); // 128px
+	
+	// 非常に大きいスペース（192px〜768px）
+	--space-6xl: calc(var(--space-base) * 12); // 192px
+	--space-7xl: calc(var(--space-base) * 16); // 256px
+	--space-8xl: calc(var(--space-base) * 24); // 384px
+	--space-9xl: calc(var(--space-base) * 32); // 512px
+	--space-10xl: calc(var(--space-base) * 40); // 640px
+	--space-11xl: calc(var(--space-base) * 48); // 768px
 }
 

@@ -1,0 +1,63 @@
+---
+import { getSpacingClass } from "../../utils/spacing";
+
+interface Props {
+  class?: string;
+  Element?: keyof HTMLElementTagNameMap;
+  max?: string;
+  padding?: string;
+  intrinsic?: boolean;
+  style?: string;
+  andText?: boolean;
+}
+
+const {
+  class: className,
+  Element = "div",
+  max,
+  padding,
+  intrinsic,
+  andText,
+  ...rest
+} = Astro.props as Props;
+
+// paddingプロパティの値からクラス名を生成
+const paddingClass = getSpacingClass(padding, "padding");
+---
+
+<Element
+  class:list={[
+    "center",
+    className,
+    intrinsic ? "intrinsic" : "",
+    andText ? "and-text" : "",
+    paddingClass,
+  ]}
+  {...rest}
+>
+  <slot />
+</Element>
+
+<style lang="scss">
+  @use "../../styles/tools/mixin" as mix;
+
+  .center {
+    box-sizing: content-box;
+    max-inline-size: var(--max-inline-size);
+    margin-inline: auto;
+    padding-inline: var(--center-padding, var(--space-m));
+
+    // スペーシングクラスを生成
+    @include mix.spacing-classes("--center-padding", "padding");
+  }
+
+  .center.intrinsic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .center.and-text > :global(.stack) > :global(* + *) {
+    text-align: center;
+  }
+</style>
