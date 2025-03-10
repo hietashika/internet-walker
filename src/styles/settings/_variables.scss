@@ -19,7 +19,7 @@ $white-disabled: rgb(255 255 255 / 26%);
 	--color-text-disabled: #{$gray-disabled};
 	--color-background-high: #{$white-high};
 	--color-background-middle: #{$white-middle};
-	--color-background-low: $white-low;
+	--color-background-low: #{$white-low};
 
 	// フォントサイズ
 	--font-size-base: 1rem; // 16px - 基準サイズ
