@@ -16,20 +16,20 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   // 24px 〜 32px
-  font-size: clamp(1.5rem, calc(1.5rem + 1vw), 2rem);
+  font-size: clamp(var(--font-size-2xl), calc(var(--font-size-2xl) + 1vw), var(--font-size-3xl));
   line-height: 1.5;
 }
 
 h2 {
   // 20px 〜 24px
-  font-size: clamp(1.25rem, calc(1.25rem + 1vw), 1.5rem);
+  font-size: clamp(var(--font-size-xl), calc(var(--font-size-xl) + 1vw), var(--font-size-2xl));
     font-weight: bold;
   line-height: 1.5;
 }
 
 h3 {
   // 18px 〜 20px
-  font-size: clamp(1.125rem, calc(1.125rem + 1vw), 1.25rem);
+  font-size: clamp(var(--font-size-l), calc(var(--font-size-l) + 1vw), var(--font-size-xl));
   font-weight: bold;
   line-height: 1.5;
 
@@ -37,13 +37,13 @@ h3 {
 
 h4 {
   // 16px 〜 18px
-  font-size: clamp(1rem, calc(1rem + 1vw), 1.125rem);
+  font-size: clamp(var(--font-size-m), calc(var(--font-size-m) + 1vw), var(--font-size-l));
   line-height: 1.5;
 }
 
 // テキスト
 p {
-  font-size: 1rem;
+  font-size: var(--font-size-m);
   line-height: 1.7;
 }
 
