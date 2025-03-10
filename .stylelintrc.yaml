@@ -25,6 +25,9 @@ rules:
   # SCSSファイルの先頭アンダースコアを許可する（パーシャルファイルの命名規則）
   scss/load-no-partial-leading-underscore: null
 
+  # <>で囲まれた要素は指摘させない
+  scss/operator-no-unspaced: null
+
   # 宣言前の空行
   declaration-empty-line-before:
     - always
