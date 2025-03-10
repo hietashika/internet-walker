@@ -1,0 +1,29 @@
+---
+interface Props {
+  class?: string;
+  Element?: keyof HTMLElementTagNameMap;
+}
+
+const { class: className, Element = "div", ...rest }: Props = Astro.props;
+---
+
+<Element class:list={["box", className]} {...rest}>
+  <slot />
+</Element>
+
+<style lang="scss">
+  .box {
+    --color-background: var(--color-text-low);
+    --color-text: var(--color-text-high);
+
+    padding: 1rem;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    outline: 0.125rem solid transparent;
+    outline-offset: -0.125rem;
+
+    :global(*) {
+      color: inherit;
+    }
+  }
+</style>
