@@ -1,0 +1,93 @@
+---
+/**
+ * Sidebarコンポーネント
+ *
+ * サイドバーを表示するためのコンテナコンポーネント
+ * サイドバーの幅や位置を制御可能
+ */
+import { getSpacingClass } from "../../utils/spacing";
+
+interface Props {
+  class?: string;
+  Element?: keyof HTMLElementTagNameMap;
+  gap?: string;
+  side?: "left" | "right";
+  min?: string; // 最小幅を指定するためのプロパティ
+  width?: string; // サイドバーの幅を指定するためのプロパティ
+  noStretch?: boolean;
+  [key: string]: any;
+}
+
+const {
+  class: className,
+  Element = "div",
+  gap,
+  side = "left",
+  min,
+  width,
+  noStretch,
+  ...rest
+}: Props = Astro.props;
+
+const gapClass = getSpacingClass(gap, "gap");
+
+// ユニークなIDを生成
+const uniqueId = `sidebar-${Math.random().toString(36).substring(2, 9)}`;
+
+// データ属性の設定
+const dataAttrs = {
+  "data-min": min || null,
+  "data-width": width || null,
+};
+---
+
+<Element
+  class:list={[
+    "sidebar",
+    `sidebar--${side}`,
+    width ? "sidebar--sideWidth" : "",
+    noStretch ? "sidebar--noStretch" : "",
+    uniqueId,
+    className,
+    gapClass,
+  ]}
+  {...dataAttrs}
+  {...rest}
+>
+  <slot />
+</Element>
+
+<style lang="scss">
+  @use "../../styles/tools/mixin" as mix;
+
+  .sidebar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sidebar-gap, var(--space-m));
+
+    @include mix.spacing-classes("--sidebar-gap", "gap");
+
+    // attr()関数を使用してデータ属性から値を取得し、型を指定してカスタムプロパティに適用
+    --sidebar-min: attr(data-min type(<percentage>), 50%);
+    --sidebar-sideWidth: attr(data-width type(<length>), 0);
+
+    > :global(*) {
+      flex-grow: 1;
+    }
+
+    &--sideWidth > :global(*) {
+      flex-basis: var(--sidebar-sideWidth);
+    }
+
+    &--right > :global(:first-child),
+    &--left > :global(:last-child) {
+      flex-grow: 999;
+      flex-basis: 0;
+      min-inline-size: var(--sidebar-min);
+    }
+
+    &--noStretch {
+      align-items: flex-start;
+    }
+  }
+</style>
