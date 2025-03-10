@@ -17,18 +17,18 @@ const { pageTitle } = Astro.props;
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<Head pageTitle={pageTitle} />
 	</head>
-	<!-- ヘッダー -->
-	<Header />
+	<body>
+		<!-- ヘッダー -->
+		<Header />
 
 	<!-- AstroSlot でページの内容を表示 -->
-	<body>
-		<slot />
-	</body>
+	<slot />
 	<!-- フッター -->
 	<Footer />
+</body>
 </html>
 
-<style>
+<style lang="scss">
 	html,
 	body {
 		width: 100%;
