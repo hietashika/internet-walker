@@ -1,8 +1,19 @@
 ---
+/**
+ * Stackコンポーネント
+ *
+ * 要素を縦方向に積み重ねるためのレイアウトプリミティブコンポーネント
+ * 子要素間の間隔を一貫して制御するために使用します
+ */
 interface Props {
   class?: string;
   Element?: keyof HTMLElementTagNameMap;
   gap?: string | number;
+  /**
+   * アクセシビリティ属性
+   * 必要に応じてaria属性をサポート
+   */
+  [key: string]: any; // その他の属性を許可
 }
 
 const { class: className, Element = "div", gap, ...rest }: Props = Astro.props;
@@ -20,33 +31,41 @@ const { class: className, Element = "div", gap, ...rest }: Props = Astro.props;
 <style lang="scss">
   @use "../../styles/tools/mixin" as *;
 
-  /* Stackコンポーネントに適用するスタイル */
+  /**
+   * Stackコンポーネントのスタイル
+   * BEM命名規則に従ったスタイル定義
+   */
   .stack {
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 
-    /* 
-      特別なスタイリングルール：
-      1. 子要素間の間隔設定
-      2. 子Stackには親のgap値を使用
-    */
-
-    /* 1. 子要素間のマージン設定 */
+    /**
+     * 子要素間の間隔を制御
+     * 直接の子要素間にのみマージンを適用
+     */
     > :global(*) + :global(*) {
       margin-block-start: var(--space, 1rem);
     }
 
-    /* 2. gap属性を持つ場合、デフォルト値を設定 */
+    /**
+     * gap属性を持つ場合のデフォルト設定
+     */
     &:global([gap]) {
       --space: 1rem; /* デフォルト値 */
     }
 
-    /* 3. スペーシングシステムを適用 - 実際のマージン値を計算 */
+    /**
+     * スペーシングシステムの適用
+     * 実際のマージン値を計算
+     */
     @include space-variables;
   }
 
-  /* 複数階層のネストにも対応するスタイル適用 */
+  /**
+   * ネストされたStackコンポーネントのスタイル
+   * 親のgap設定を子コンポーネントに引き継ぐ
+   */
   @include nested-space-variables;
 </style>
