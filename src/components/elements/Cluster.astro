@@ -1,0 +1,105 @@
+---
+/**
+ * Clusterコンポーネント
+ *
+ * 要素をグループ化して配置するためのコンテナコンポーネント
+ * 配置位置や間隔を制御可能
+ * gapプロパティは "rowGap columnGap" の形式での指定も可能 (例: "3 6")
+ */
+
+import { getGapClasses } from "../../utils/spacing";
+
+interface Props {
+  class?: string;
+  Element?: keyof HTMLElementTagNameMap;
+  align?: "start" | "center" | "end";
+  justify?: "start" | "center" | "end" | "between";
+  content?: "start" | "center" | "end";
+  gap?: string;
+  [key: string]: any;
+}
+
+const {
+  class: className,
+  Element = "div",
+  align,
+  justify,
+  content,
+  gap,
+  ...rest
+} = Astro.props;
+
+// スペースで区切られた値に対応したギャップクラス配列を取得
+const gapClasses = getGapClasses(gap);
+---
+
+<Element
+  class:list={[
+    "cluster",
+    align ? `cluster--align-${align}` : "",
+    justify ? `cluster--justify-${justify}` : "",
+    content ? `cluster--content-${content}` : "",
+    ...(Array.isArray(gapClasses) ? gapClasses : []),
+    className,
+  ]}
+  {...rest}
+>
+  <slot />
+</Element>
+
+<style lang="scss">
+  @use "../../styles/tools/mixin" as mix;
+
+  .cluster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--cluster-gap, var(--space-m));
+
+    // 二次元ギャップ処理用ミックスインを使用
+    @include mix.two-dimensional-gap(
+      "--cluster-gap",
+      "--cluster-row-gap",
+      "--cluster-column-gap"
+    );
+
+    &--align-start {
+      align-items: flex-start;
+    }
+
+    &--align-center {
+      align-items: center;
+    }
+
+    &--align-end {
+      align-items: flex-end;
+    }
+
+    &--justify-start {
+      justify-content: flex-start;
+    }
+
+    &--justify-center {
+      justify-content: center;
+    }
+
+    &--justify-end {
+      justify-content: flex-end;
+    }
+
+    &--justify-between {
+      justify-content: space-between;
+    }
+
+    &--content-start {
+      align-content: flex-start;
+    }
+
+    &--content-center {
+      align-content: center;
+    }
+
+    &--content-end {
+      align-content: flex-end;
+    }
+  }
+</style>

@@ -27,4 +27,54 @@ export function getSpacingClasses(values: Record<string, string | undefined>): s
   return Object.entries(values)
     .filter(([_, value]) => value !== undefined)
     .map(([prefix, value]) => getSpacingClass(value, prefix));
+}
+
+/**
+ * Gapプロパティのための特殊なクラス名生成ヘルパー関数
+ * スペースで区切られた2つの値（row-gap column-gap）をサポート
+ * 
+ * @param value - gap属性値（例：'1', '2 3'）
+ * @param options - オプション設定
+ * @returns 生成されたクラス名または複数のクラス名
+ */
+export function getGapClasses(
+  value: string | undefined, 
+  options: { 
+    useDimensionalProps?: boolean;       // trueの場合row-gap/column-gap属性を使用、falseの場合クラス名を使用
+    rowPrefix?: string;                  // 行方向のプロパティ名・クラス名（デフォルト: 'row-gap'）
+    columnPrefix?: string;               // 列方向のプロパティ名・クラス名（デフォルト: 'column-gap'）
+    defaultPrefix?: string;              // 単一値の場合のプロパティ名・クラス名（デフォルト: 'gap'）
+  } = {}
+): string[] | Record<string, string> {
+  const { 
+    useDimensionalProps = false,
+    rowPrefix = 'row-gap', 
+    columnPrefix = 'column-gap', 
+    defaultPrefix = 'gap' 
+  } = options;
+  
+  if (!value) return useDimensionalProps ? {} : [];
+  
+  // スペースで区切られた値かチェック
+  const values = value.trim().split(/\s+/);
+  
+  if (values.length === 1) {
+    // 単一の値の場合
+    return useDimensionalProps 
+      ? { [defaultPrefix]: value }
+      : [getSpacingClass(value, defaultPrefix)];
+  } else if (values.length === 2) {
+    // 2つの値がある場合、row-gapとcolumn-gap
+    const [rowGap, columnGap] = values;
+    
+    return useDimensionalProps
+      ? { [rowPrefix]: rowGap, [columnPrefix]: columnGap }
+      : [
+          getSpacingClass(rowGap, rowPrefix),
+          getSpacingClass(columnGap, columnPrefix)
+        ];
+  }
+  
+  // 不正な形式の場合
+  return useDimensionalProps ? {} : [];
 } 
