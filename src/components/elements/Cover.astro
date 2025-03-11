@@ -4,7 +4,7 @@
  * 中央に配置されたコンテンツに上下の自動マージンを適用
  * 上部と下部には名前付きスロットを使用
  */
-import { getSpacingClass, getGapClasses } from "../../utils/spacing";
+import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
   class?: string;
@@ -24,11 +24,15 @@ const {
   ...rest
 } = Astro.props as Props;
 
-const paddingClass = getSpacingClass(padding, "padding");
-const gapClasses = getGapClasses(gap);
-
-const dataAttrs = {
+// 基本コンポーネントに渡すプロパティを準備
+const baseProps = {
+  componentClass: "cover",
+  class: className,
+  Element,
+  padding,
+  gap,
   "data-height": height || null,
+  ...rest,
 };
 
 // スロットの中身を確認するためのヘルパー関数
@@ -47,16 +51,7 @@ const hasDefaultSlot = hasSlotContent(null);
 const hasBottomSlot = hasSlotContent("bottom");
 ---
 
-<Element
-  class:list={[
-    "cover",
-    className,
-    paddingClass,
-    ...(Array.isArray(gapClasses) ? gapClasses : []),
-  ]}
-  {...dataAttrs}
-  {...rest}
->
+<BaseElement {...baseProps}>
   {
     hasTopSlot && (
       <div data-slot="top">
@@ -78,17 +73,16 @@ const hasBottomSlot = hasSlotContent("bottom");
       </div>
     )
   }
-</Element>
+</BaseElement>
 
 <style lang="scss">
   @use "../../styles/tools/mixin" as mix;
 
-  .cover {
+  @include mix.element-base("cover") {
     display: flex;
     flex-direction: column;
     gap: var(--cover-gap, var(--space-m));
     min-block-size: var(--cover-height);
-    padding: var(--cover-padding, var(--space-m));
 
     --cover-height: attr(data-height type(<length>), 100dvh);
 

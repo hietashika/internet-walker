@@ -5,7 +5,7 @@
  * thresholdでしきい値を指定する。デフォルトは30rem
  */
 
-import { getGapClasses } from "../../utils/spacing";
+import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
   class?: string;
@@ -23,30 +23,25 @@ const {
   ...rest
 } = Astro.props as Props;
 
-const gapClasses = getGapClasses(gap);
-
-// データ属性を設定
-const dataAttrs = {
+// 基本コンポーネントに渡すプロパティを準備
+const baseProps = {
+  componentClass: "switcher",
+  class: className,
+  Element,
+  gap,
   "data-threshold": threshold || null,
+  ...rest,
 };
 ---
 
-<Element
-  class:list={[
-    "switcher",
-    ...(Array.isArray(gapClasses) ? gapClasses : []),
-    className,
-  ]}
-  {...dataAttrs}
-  {...rest}
->
+<BaseElement {...baseProps}>
   <slot />
-</Element>
+</BaseElement>
 
 <style lang="scss">
   @use "../../styles/tools/mixin" as mix;
 
-  .switcher {
+  @include mix.element-base("switcher") {
     display: flex;
     flex-wrap: wrap;
     gap: var(--switcher-gap, var(--space-m));

@@ -5,10 +5,12 @@
  * 要素を縦方向に積み重ねるためのレイアウトプリミティブコンポーネント
  * 子要素間の間隔を一貫して制御するために使用します
  */
+import BaseElement from "./base/BaseElement.astro";
+
 interface Props {
   class?: string;
   Element?: keyof HTMLElementTagNameMap;
-  gap?: string | number;
+  gap?: string;
   /**
    * アクセシビリティ属性
    * 必要に応じてaria属性をサポート
@@ -16,17 +18,47 @@ interface Props {
   [key: string]: any; // その他の属性を許可
 }
 
-const { class: className, Element = "div", gap, ...rest } = Astro.props as Props;
+const {
+  class: className,
+  Element = "div",
+  gap,
+  padding,
+  ...rest
+} = Astro.props as Props;
+
+// 基本コンポーネントに渡すプロパティを準備
+const baseProps = {
+  componentClass: "stack",
+  class: className,
+  Element,
+  ...rest,
+};
+
+// gap属性は特別に処理
+// Stackでは子要素間のマージンを使用するため、この属性は直接渡す
+const hasMultipleGaps = gap && gap.trim().split(/\s+/).length > 1;
+
+// 複数のギャップ値を処理
+const [mainGap, crossGap] = hasMultipleGaps
+  ? gap.trim().split(/\s+/)
+  : [gap, undefined];
+
+// データ属性を準備
+const dataAttributes = hasMultipleGaps
+  ? {
+      "data-stack": true,
+      "data-main-gap": mainGap,
+      "data-cross-gap": crossGap,
+    }
+  : {
+      "data-stack": true,
+      gap,
+    };
 ---
 
-<Element
-  class:list={["stack", className]}
-  {...gap ? { gap } : {}}
-  data-stack
-  {...rest}
->
+<BaseElement {...baseProps} {...dataAttributes}>
   <slot />
-</Element>
+</BaseElement>
 
 <style lang="scss">
   @use "../../styles/tools/mixin" as *;
@@ -35,7 +67,7 @@ const { class: className, Element = "div", gap, ...rest } = Astro.props as Props
    * Stackコンポーネントのスタイル
    * BEM命名規則に従ったスタイル定義
    */
-  .stack {
+  @include element-base("stack") {
     position: relative;
     display: flex;
     flex-direction: column;

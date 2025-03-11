@@ -5,7 +5,7 @@
  * コンテンツを中央に配置するためのコンテナコンポーネント
  * paddingを制御可能
  */
-import { getSpacingClass } from "../../utils/spacing";
+import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
   class?: string;
@@ -15,6 +15,10 @@ interface Props {
   intrinsic?: boolean;
   style?: string;
   andText?: boolean;
+  /**
+   * その他の属性を許可
+   */
+  [key: string]: any;
 }
 
 const {
@@ -27,27 +31,26 @@ const {
   ...rest
 } = Astro.props as Props;
 
-// paddingプロパティの値からクラス名を生成
-const paddingClass = getSpacingClass(padding, "padding");
+// 基本コンポーネントに渡すプロパティを準備
+const baseProps = {
+  componentClass: "center",
+  class: [intrinsic ? "intrinsic" : "", andText ? "and-text" : "", className]
+    .filter(Boolean)
+    .join(" "),
+  Element,
+  padding,
+  ...rest,
+};
 ---
 
-<Element
-  class:list={[
-    "center",
-    className,
-    intrinsic ? "intrinsic" : "",
-    andText ? "and-text" : "",
-    paddingClass,
-  ]}
-  {...rest}
->
+<BaseElement {...baseProps}>
   <slot />
-</Element>
+</BaseElement>
 
 <style lang="scss">
   @use "../../styles/tools/mixin" as mix;
 
-  .center {
+  @include mix.element-base("center") {
     box-sizing: content-box;
     max-inline-size: var(--max-inline-size);
     margin-inline: auto;
@@ -55,15 +58,16 @@ const paddingClass = getSpacingClass(padding, "padding");
 
     // スペーシングクラスを生成
     @include mix.spacing-classes("--center-padding", "padding");
-  }
 
-  .center.intrinsic {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+    // バリアント
+    &.intrinsic {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-  .center.and-text > :global(.stack) > :global(* + *) {
-    text-align: center;
+    &.and-text > :global(.stack) > :global(* + *) {
+      text-align: center;
+    }
   }
 </style>

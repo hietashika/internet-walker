@@ -5,7 +5,7 @@
  * コンテンツを囲むための基本的なコンテナコンポーネント
  * padding、margin、背景色などを制御可能
  */
-import { getSpacingClasses } from "../../utils/spacing";
+import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
   padding?: string;
@@ -35,21 +35,25 @@ const {
   ...rest
 } = Astro.props as Props;
 
-// スペーシングクラスを生成
-const spacingClasses = getSpacingClasses({ padding, margin });
-
 // サーフェスクラスを生成（存在する場合のみ）
 const surfaceClass = surface
   ? `box--surface${surface.charAt(0).toUpperCase() + surface.slice(1)}`
   : "";
+
+// 基本コンポーネントに渡すプロパティを準備
+const baseProps = {
+  componentClass: "box",
+  class: [surfaceClass, className].filter(Boolean).join(" "),
+  Element,
+  padding,
+  margin,
+  ...rest,
+};
 ---
 
-<Element
-  class:list={["box", ...spacingClasses, surfaceClass, className]}
-  {...rest}
->
+<BaseElement {...baseProps}>
   <slot />
-</Element>
+</BaseElement>
 
 <style lang="scss">
   @use "../../styles/tools/mixin" as mix;
@@ -57,9 +61,7 @@ const surfaceClass = surface
   /**
    * Boxコンポーネントのスタイル
    */
-  .box {
-    margin: var(--box-margin, 0);
-    padding: var(--box-padding, var(--space-m));
+  @include mix.element-base("box") {
     background-color: transparent;
     outline: 0.125rem solid transparent;
     outline-offset: -0.125rem;

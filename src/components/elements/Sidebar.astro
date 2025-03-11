@@ -5,7 +5,7 @@
  * サイドバーを表示するためのコンテナコンポーネント
  * サイドバーの幅や折り返すを制御可能
  */
-import { getGapClasses } from "../../utils/spacing";
+import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
   class?: string;
@@ -29,38 +29,37 @@ const {
   ...rest
 } = Astro.props as Props;
 
-const gapClasses = getGapClasses(gap);
-
 // ユニークなIDを生成
 const uniqueId = `sidebar-${Math.random().toString(36).substring(2, 9)}`;
 
-// データ属性の設定
-const dataAttrs = {
-  "data-min": min || null,
-  "data-width": width || null,
-};
----
-
-<Element
-  class:list={[
-    "sidebar",
+// 基本コンポーネントに渡すプロパティを準備
+const baseProps = {
+  componentClass: "sidebar",
+  class: [
     `sidebar--${side}`,
     width ? "sidebar--sideWidth" : "",
     noStretch ? "sidebar--noStretch" : "",
     uniqueId,
     className,
-    ...(Array.isArray(gapClasses) ? gapClasses : []),
-  ]}
-  {...dataAttrs}
-  {...rest}
->
+  ]
+    .filter(Boolean)
+    .join(" "),
+  Element,
+  gap,
+  "data-min": min || null,
+  "data-width": width || null,
+  ...rest,
+};
+---
+
+<BaseElement {...baseProps}>
   <slot />
-</Element>
+</BaseElement>
 
 <style lang="scss">
   @use "../../styles/tools/mixin" as mix;
 
-  .sidebar {
+  @include mix.element-base("sidebar") {
     display: flex;
     flex-wrap: wrap;
     gap: var(--sidebar-gap, var(--space-m));

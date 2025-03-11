@@ -7,7 +7,7 @@
  * gapプロパティは "rowGap columnGap" の形式での指定も可能 (例: "3 6")
  */
 
-import { getGapClasses } from "../../utils/spacing";
+import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
   class?: string;
@@ -29,28 +29,31 @@ const {
   ...rest
 } = Astro.props as Props;
 
-// スペースで区切られた値に対応したギャップクラス配列を取得
-const gapClasses = getGapClasses(gap);
+// 位置指定クラスを生成
+const alignClass = align ? `cluster--align-${align}` : "";
+const justifyClass = justify ? `cluster--justify-${justify}` : "";
+const contentClass = content ? `cluster--content-${content}` : "";
+
+// 基本コンポーネントに渡すプロパティを準備
+const baseProps = {
+  componentClass: "cluster",
+  class: [alignClass, justifyClass, contentClass, className]
+    .filter(Boolean)
+    .join(" "),
+  Element,
+  gap,
+  ...rest,
+};
 ---
 
-<Element
-  class:list={[
-    "cluster",
-    align ? `cluster--align-${align}` : "",
-    justify ? `cluster--justify-${justify}` : "",
-    content ? `cluster--content-${content}` : "",
-    ...(Array.isArray(gapClasses) ? gapClasses : []),
-    className,
-  ]}
-  {...rest}
->
+<BaseElement {...baseProps}>
   <slot />
-</Element>
+</BaseElement>
 
 <style lang="scss">
   @use "../../styles/tools/mixin" as mix;
 
-  .cluster {
+  @include mix.element-base("cluster") {
     display: flex;
     flex-wrap: wrap;
     gap: var(--cluster-gap, var(--space-m));

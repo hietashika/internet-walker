@@ -181,3 +181,23 @@
     }
   }
 }
+
+/**
+ * レイアウトエレメントの基本スタイルを生成するミックスイン
+ * 各コンポーネントの共通処理を統一的に適用
+ *
+ * @param {string} $name - コンポーネント名（例：box, stack, cluster）
+ */
+@mixin element-base($name) {
+  .#{$name} {
+    // 共通のベーススタイル
+    
+    // スペーシングとギャップの共通変数
+    --#{$name}-padding: var(--space-m);
+    --#{$name}-margin: 0;
+    --#{$name}-gap: var(--space-m);
+    
+    // 子クラス固有のスタイルはこの後に記述
+    @content;
+  }
+}
