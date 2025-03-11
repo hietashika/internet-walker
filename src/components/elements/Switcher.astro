@@ -1,0 +1,67 @@
+---
+/**
+ * Switherコンポーネント
+ *
+ */
+
+import { getGapClasses } from "../../utils/spacing";
+
+interface Props {
+  class?: string;
+  Element?: keyof HTMLElementTagNameMap;
+  threshold?: string;
+  gap?: string;
+  [key: string]: any;
+}
+
+const {
+  class: className,
+  Element = "div",
+  threshold,
+  gap,
+  ...rest
+}: Props = Astro.props;
+
+const gapClasses = getGapClasses(gap);
+
+// データ属性を設定
+const dataAttrs = {
+  "data-threshold": threshold || null,
+};
+---
+
+<Element
+  class:list={[
+    "switcher",
+    ...(Array.isArray(gapClasses) ? gapClasses : []),
+    className,
+  ]}
+  {...dataAttrs}
+  {...rest}
+>
+  <slot />
+</Element>
+
+<style lang="scss">
+  @use "../../styles/tools/mixin" as mix;
+
+  .switcher {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--switcher-gap, var(--space-m));
+
+    // attr()関数を使用してデータ属性から値を取得し、型を指定してカスタムプロパティに適用
+    --switcher-threshold: attr(data-threshold type(<length>), 30rem);
+
+    @include mix.two-dimensional-gap(
+      "--switcher-gap",
+      "--switcher-row-gap",
+      "--switcher-column-gap"
+    );
+
+    > :global(*) {
+      flex-grow: 1;
+      flex-basis: calc((var(--switcher-threshold) - 100%) * 999);
+    }
+  }
+</style>
