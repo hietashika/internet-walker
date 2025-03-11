@@ -33,7 +33,7 @@ const {
   Element = "div",
   surface,
   ...rest
-} = Astro.props;
+} = Astro.props as Props;
 
 // スペーシングクラスを生成
 const spacingClasses = getSpacingClasses({ padding, margin });

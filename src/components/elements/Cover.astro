@@ -1,0 +1,117 @@
+---
+/**
+ * Coverコンポーネント
+ * 中央に配置されたコンテンツに上下の自動マージンを適用
+ * 上部と下部には名前付きスロットを使用
+ */
+import { getSpacingClass, getGapClasses } from "../../utils/spacing";
+
+interface Props {
+  class?: string;
+  Element?: keyof HTMLElementTagNameMap;
+  padding?: string;
+  gap?: string;
+  height?: string;
+  [key: string]: any;
+}
+
+const {
+  class: className,
+  Element = "div",
+  padding,
+  gap,
+  height,
+  ...rest
+} = Astro.props as Props;
+
+const paddingClass = getSpacingClass(padding, "padding");
+const gapClasses = getGapClasses(gap);
+
+const dataAttrs = {
+  "data-height": height || null,
+};
+
+// スロットの中身を確認するためのヘルパー関数
+const hasSlotContent = (slotName: string | null) => {
+  // デフォルトスロット
+  if (slotName === null) {
+    return Astro.slots.has("default");
+  }
+  // 名前付きスロット
+  return Astro.slots.has(slotName);
+};
+
+// 各スロットの存在確認
+const hasTopSlot = hasSlotContent("top");
+const hasDefaultSlot = hasSlotContent(null);
+const hasBottomSlot = hasSlotContent("bottom");
+---
+
+<Element
+  class:list={[
+    "cover",
+    className,
+    paddingClass,
+    ...(Array.isArray(gapClasses) ? gapClasses : []),
+  ]}
+  {...dataAttrs}
+  {...rest}
+>
+  {
+    hasTopSlot && (
+      <div data-slot="top">
+        <slot name="top" />
+      </div>
+    )
+  }
+  {
+    hasDefaultSlot && (
+      <div data-slot="center">
+        <slot />
+      </div>
+    )
+  }
+  {
+    hasBottomSlot && (
+      <div data-slot="bottom">
+        <slot name="bottom" />
+      </div>
+    )
+  }
+</Element>
+
+<style lang="scss">
+  @use "../../styles/tools/mixin" as mix;
+
+  .cover {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cover-gap, var(--space-m));
+    min-block-size: var(--cover-height);
+    padding: var(--cover-padding, var(--space-m));
+
+    --cover-height: attr(data-height type(<length>), 100dvh);
+
+    @include mix.spacing-classes("--cover-padding", "padding");
+    @include mix.two-dimensional-gap(
+      "--cover-gap",
+      "--cover-row-gap",
+      "--cover-column-gap"
+    );
+
+    /* 中央スロットのラッパーには上下の自動マージンを適用 */
+    > [data-slot="center"] {
+      margin-block: auto;
+    }
+
+    /* topスロットのラッパーは上マージンを0に */
+    > [data-slot="top"] {
+      margin-block-start: 0;
+    }
+
+    /* bottomスロットのラッパーは下マージンを0に */
+    > [data-slot="bottom"] {
+      margin-block-end: 0;
+    }
+  }
+</style>

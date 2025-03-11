@@ -27,7 +27,7 @@ const {
   content,
   gap,
   ...rest
-} = Astro.props;
+} = Astro.props as Props;
 
 // スペースで区切られた値に対応したギャップクラス配列を取得
 const gapClasses = getGapClasses(gap);

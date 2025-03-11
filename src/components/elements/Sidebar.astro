@@ -27,7 +27,7 @@ const {
   width,
   noStretch,
   ...rest
-}: Props = Astro.props;
+} = Astro.props as Props;
 
 const gapClasses = getGapClasses(gap);
 

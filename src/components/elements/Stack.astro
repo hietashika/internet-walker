@@ -16,7 +16,7 @@ interface Props {
   [key: string]: any; // その他の属性を許可
 }
 
-const { class: className, Element = "div", gap, ...rest }: Props = Astro.props;
+const { class: className, Element = "div", gap, ...rest } = Astro.props as Props;
 ---
 
 <Element

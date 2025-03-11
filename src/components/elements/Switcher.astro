@@ -1,7 +1,8 @@
 ---
 /**
  * Switherコンポーネント
- *
+ * 指定したしきい値より画面幅が狭くなると、子要素が縦に並ぶコンポーネント
+ * thresholdでしきい値を指定する。デフォルトは30rem
  */
 
 import { getGapClasses } from "../../utils/spacing";
@@ -20,7 +21,7 @@ const {
   threshold,
   gap,
   ...rest
-}: Props = Astro.props;
+} = Astro.props as Props;
 
 const gapClasses = getGapClasses(gap);
 

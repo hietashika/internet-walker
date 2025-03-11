@@ -6,6 +6,7 @@ import Center from "@elements/Center.astro";
 import Sidebar from "@elements/Sidebar.astro";
 import Cluster from "@elements/Cluster.astro";
 import Switcher from "@elements/Switcher.astro";
+import Cover from "@elements/Cover.astro";
 ---
 
 <Layout pageTitle="Test">
@@ -42,7 +43,7 @@ import Switcher from "@elements/Switcher.astro";
         </Stack>
       </Box>
     </Cluster>
-    <Switcher threshold="30rem">
+    <Switcher>
       <Box padding="1" surface="tertiary">
         <h1>ヘッドライン</h1>
       </Box>
@@ -54,4 +55,9 @@ import Switcher from "@elements/Switcher.astro";
       </Box>
     </Switcher>
   </Center>
+  <Cover height="100dvh" padding="1">
+    <p>テキスト</p>
+    <p>テキスト</p>
+    <p slot="bottom">テキスト</p>
+  </Cover>
 </Layout>
