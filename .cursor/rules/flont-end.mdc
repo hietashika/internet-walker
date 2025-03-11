@@ -126,6 +126,62 @@ https://github.com/nicolas-cusan/destyle.css/blob/master/destyle.css
 - `$prefix`: クラスのプレフィックス（例：`padding`, `margin`, `gap`）
 - `$selector`: 追加のセレクタ（オプション）
 
+### 二次元ギャップの制御
+
+一部のレイアウトコンポーネントでは、行と列の間隔を個別に指定できる二次元ギャップを実装しています。これは以下の二つの方法で実装されています：
+
+#### 1. クラスベースの実装（Clusterコンポーネント）
+
+Clusterコンポーネントでは、CSS変数とクラス名を使用して二次元ギャップを制御します：
+
+```astro
+<!-- 行間・列間で同じギャップ値を使用 -->
+<Cluster gap="2">コンテンツ</Cluster>
+
+<!-- 行間（row-gap）と列間（column-gap）で異なる値を使用 -->
+<Cluster gap="2 4">コンテンツ</Cluster>
+```
+
+2つの値を指定した場合：
+- 最初の値は行間（row-gap）に適用されます - 例: "2" → 24px
+- 2番目の値は列間（column-gap）に適用されます - 例: "4" → 48px
+
+内部では`two-dimensional-gap`ミックスインを使用して、効率的に二次元ギャップを制御しています：
+
+```scss
+@mixin two-dimensional-gap($base-property, $row-property, $column-property) {
+  // ミックスインの実装
+}
+```
+
+#### 2. 属性ベースの実装（Stackコンポーネント）
+
+Stackコンポーネントでは、HTML属性を使用して二次元ギャップを制御します：
+
+```astro
+<!-- 単一のギャップ値 -->
+<Stack gap="2">コンテンツ</Stack>
+
+<!-- 主軸と交差軸で異なるギャップ値 -->
+<Stack gap="3 1">コンテンツ</Stack>
+```
+
+複数値を指定した場合：
+- 最初の値は主軸（margin-block-start）に適用され、子要素間の縦方向の間隔を制御します
+- 2番目の値は交差軸（column-gap）に適用され、水平方向の間隔を制御します
+
+Stackコンポーネントではmargin-block-startを使用して子要素間の間隔を制御する特殊な実装がされているため、属性ベースの制御が採用されています。
+
+```scss
+&:global([data-main-gap="3"]) {
+  --space: var(--space-xl); // 32px
+}
+
+&:global([data-cross-gap="1"]) {
+  column-gap: var(--space-m); // 16px
+}
+```
+
 ### スペーシングヘルパー関数
 
 TypeScriptを使って、属性からクラス名を生成するヘルパー関数を `src/utils/spacing.ts` に実装しています：
@@ -136,6 +192,9 @@ getSpacingClass(value: string | undefined, prefix: string): string
 
 // 複数のスペーシング属性からクラス名を生成
 getSpacingClasses(values: Record<string, string | undefined>): string[]
+
+// ギャップ値（単一または複数）からクラス名を生成
+getGapClasses(value: string | undefined, options?: object): string[] | Record<string, string>
 ```
 
 ### 使用方法
@@ -154,63 +213,4 @@ getSpacingClasses(values: Record<string, string | undefined>): string[]
 
 #### 新しいコンポーネントでの実装例
 
-```astro
----
-import { getSpacingClass } from '../../utils/spacing';
-
-interface Props {
-  padding?: string;
-  // その他のプロパティ
-}
-
-const { padding, ...rest } = Astro.props;
-const paddingClass = getSpacingClass(padding, 'padding');
----
-
-<div class:list={["component", paddingClass]} {...rest}>
-  <slot />
-</div>
-
-<style lang="scss">
-  @use "../../styles/tools/mixin" as mix;
-  
-  .component {
-    padding: var(--component-padding, var(--space-m));
-    
-    @include mix.spacing-classes('--component-padding', 'padding');
-  }
-</style>
-```
-
-#### 複数のスペーシング属性を持つコンポーネント
-
-```astro
----
-import { getSpacingClasses } from '../../utils/spacing';
-
-interface Props {
-  padding?: string;
-  margin?: string;
-  // その他のプロパティ
-}
-
-const { padding, margin, ...rest } = Astro.props;
-const spacingClasses = getSpacingClasses({ padding, margin });
----
-
-<div class:list={["component", ...spacingClasses]} {...rest}>
-  <slot />
-</div>
-
-<style lang="scss">
-  @use "../../styles/tools/mixin" as mix;
-  
-  .component {
-    padding: var(--component-padding, var(--space-m));
-    margin: var(--component-margin, 0);
-    
-    @include mix.spacing-classes('--component-padding', 'padding');
-    @include mix.spacing-classes('--component-margin', 'margin');
-  }
-</style>
 ```
