@@ -77,3 +77,107 @@
   &.#{$prefix}-9#{$selector-text} { #{$property}: var(--space-7xl); } // 256px
   &.#{$prefix}-10#{$selector-text} { #{$property}: var(--space-8xl); } // 384px
 }
+
+// 二次元ギャップ処理用ミックスイン
+// コンポーネントがrow-gapとcolumn-gapの両方を持つ場合に使用
+// $base-property: ベースとなるCSSプロパティ（例：--cluster-gap）
+// $row-property: 行間のCSS変数（例：--cluster-row-gap）
+// $column-property: 列間のCSS変数（例：--cluster-column-gap）
+@mixin two-dimensional-gap($base-property, $row-property, $column-property) {
+  // 単一のギャップ値用
+  @include spacing-classes($base-property, "gap");
+  
+  // 二次元ギャップ値用
+  @include spacing-classes($row-property, "row-gap");
+  @include spacing-classes($column-property, "column-gap");
+  
+  // row-gapが指定されている場合
+  &.row-gap-0,
+  &.row-gap-1,
+  &.row-gap-2,
+  &.row-gap-3,
+  &.row-gap-4,
+  &.row-gap-5,
+  &.row-gap-6,
+  &.row-gap-7,
+  &.row-gap-8,
+  &.row-gap-9,
+  &.row-gap-10,
+  &.row-gap-neg-1,
+  &.row-gap-neg-2,
+  &.row-gap-neg-3 {
+    row-gap: var(#{$row-property});
+  }
+
+  // column-gapが指定されている場合
+  &.column-gap-0,
+  &.column-gap-1,
+  &.column-gap-2,
+  &.column-gap-3,
+  &.column-gap-4,
+  &.column-gap-5,
+  &.column-gap-6,
+  &.column-gap-7,
+  &.column-gap-8,
+  &.column-gap-9,
+  &.column-gap-10,
+  &.column-gap-neg-1,
+  &.column-gap-neg-2,
+  &.column-gap-neg-3 {
+    column-gap: var(#{$column-property});
+  }
+  
+  // 両方のギャップが指定されている場合、個別のプロパティを使用し通常のgapは無効化
+  &.gap-0,
+  &.gap-1,
+  &.gap-2,
+  &.gap-3,
+  &.gap-4,
+  &.gap-5,
+  &.gap-6,
+  &.gap-7,
+  &.gap-8,
+  &.gap-9,
+  &.gap-10,
+  &.gap-neg-1,
+  &.gap-neg-2,
+  &.gap-neg-3 {
+    gap: var(#{$base-property});
+  }
+  
+  // row-gapとcolumn-gapが両方設定されている場合、gapプロパティを使わない
+  // （個別に設定された値を優先する）
+  @at-root {
+    %has-dimensional-gap {
+      @for $i from -3 through 10 {
+        $suffix: if($i < 0, 'neg-#{abs($i)}', '#{$i}');
+
+        @if $i != -3 and $i != -2 and $i != -1 and $i != 5 and $i != 7 and $i != 9 {
+          &.row-gap-#{$suffix},
+          &.column-gap-#{$suffix} {
+            @content;
+          }
+        }
+      }
+    }
+    
+    #{&}.gap-0,
+    #{&}.gap-1,
+    #{&}.gap-2,
+    #{&}.gap-3,
+    #{&}.gap-4,
+    #{&}.gap-5,
+    #{&}.gap-6,
+    #{&}.gap-7,
+    #{&}.gap-8,
+    #{&}.gap-9,
+    #{&}.gap-10,
+    #{&}.gap-neg-1,
+    #{&}.gap-neg-2,
+    #{&}.gap-neg-3 {
+      @extend %has-dimensional-gap;
+
+      gap: initial;
+    }
+  }
+}

@@ -5,7 +5,7 @@
  * サイドバーを表示するためのコンテナコンポーネント
  * サイドバーの幅や折り返すを制御可能
  */
-import { getSpacingClass } from "../../utils/spacing";
+import { getGapClasses } from "../../utils/spacing";
 
 interface Props {
   class?: string;
@@ -29,7 +29,7 @@ const {
   ...rest
 }: Props = Astro.props;
 
-const gapClass = getSpacingClass(gap, "gap");
+const gapClasses = getGapClasses(gap);
 
 // ユニークなIDを生成
 const uniqueId = `sidebar-${Math.random().toString(36).substring(2, 9)}`;
@@ -49,7 +49,7 @@ const dataAttrs = {
     noStretch ? "sidebar--noStretch" : "",
     uniqueId,
     className,
-    gapClass,
+    ...(Array.isArray(gapClasses) ? gapClasses : []),
   ]}
   {...dataAttrs}
   {...rest}
@@ -65,7 +65,11 @@ const dataAttrs = {
     flex-wrap: wrap;
     gap: var(--sidebar-gap, var(--space-m));
 
-    @include mix.spacing-classes("--sidebar-gap", "gap");
+    @include mix.two-dimensional-gap(
+      "--sidebar-gap",
+      "--sidebar-row-gap",
+      "--sidebar-column-gap"
+    );
 
     // attr()関数を使用してデータ属性から値を取得し、型を指定してカスタムプロパティに適用
     --sidebar-min: attr(data-min type(<percentage>), 50%);
