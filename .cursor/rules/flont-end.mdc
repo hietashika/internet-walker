@@ -213,4 +213,170 @@ getGapClasses(value: string | undefined, options?: object): string[] | Record<st
 
 #### 新しいコンポーネントでの実装例
 
+```astro
+---
+import { getSpacingClass } from '../../utils/spacing';
+
+interface Props {
+  padding?: string;
+  // その他のプロパティ
+}
+
+const { padding, ...rest } = Astro.props;
+const paddingClass = getSpacingClass(padding, 'padding');
+---
+
+<div class:list={["component", paddingClass]} {...rest}>
+  <slot />
+</div>
+
+<style lang="scss">
+  @use "../../styles/tools/mixin" as mix;
+  
+  .component {
+    padding: var(--component-padding, var(--space-m));
+    
+    @include mix.spacing-classes('--component-padding', 'padding');
+  }
+</style>
 ```
+
+#### 複数のスペーシング属性を持つコンポーネント
+
+```astro
+---
+import { getSpacingClasses } from '../../utils/spacing';
+
+interface Props {
+  padding?: string;
+  margin?: string;
+  // その他のプロパティ
+}
+
+const { padding, margin, ...rest } = Astro.props;
+const spacingClasses = getSpacingClasses({ padding, margin });
+---
+
+<div class:list={["component", ...spacingClasses]} {...rest}>
+  <slot />
+</div>
+
+<style lang="scss">
+  @use "../../styles/tools/mixin" as mix;
+  
+  .component {
+    padding: var(--component-padding, var(--space-m));
+    margin: var(--component-margin, 0);
+    
+    @include mix.spacing-classes('--component-padding', 'padding');
+    @include mix.spacing-classes('--component-margin', 'margin');
+  }
+</style>
+```
+
+#### 二次元ギャップを持つコンポーネントの実装例
+
+##### クラスベースの実装（Flexbox使用時）
+
+```astro
+---
+import { getGapClasses } from '../../utils/spacing';
+
+interface Props {
+  gap?: string;
+  // その他のプロパティ
+}
+
+const { gap, ...rest } = Astro.props;
+// gap="2 4"のような形式をサポート
+const gapClasses = getGapClasses(gap);
+---
+
+<div 
+  class:list={[
+    "component", 
+    ...(Array.isArray(gapClasses) ? gapClasses : [])
+  ]} 
+  {...rest}
+>
+  <slot />
+</div>
+
+<style lang="scss">
+  @use "../../styles/tools/mixin" as mix;
+  
+  .component {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--component-gap, var(--space-m));
+    
+    // 二次元ギャップ処理用ミックスインを使用
+    @include mix.two-dimensional-gap(
+      "--component-gap",
+      "--component-row-gap",
+      "--component-column-gap"
+    );
+  }
+</style>
+```
+
+##### 属性ベースの実装（Stackコンポーネント等）
+
+```astro
+---
+interface Props {
+  gap?: string;
+  // その他のプロパティ
+}
+
+const { gap, ...rest } = Astro.props;
+
+// gap値を解析し、複数の値が指定されているか確認
+const hasMultipleGaps = gap && typeof gap === "string" && gap.trim().split(/\s+/).length > 1;
+const [mainGap, crossGap] = hasMultipleGaps
+  ? gap.trim().split(/\s+/)
+  : [gap, undefined];
+---
+
+<div
+  class:list={["component"]}
+  {...hasMultipleGaps
+    ? { "data-main-gap": mainGap, "data-cross-gap": crossGap }
+    : { gap }}
+  {...rest}
+>
+  <slot />
+</div>
+
+<style lang="scss">
+  @use "../../styles/tools/mixin" as *;
+  
+  .component {
+    // コンポーネント固有のスタイル
+    
+    // 子要素間の間隔を制御（Stackパターンの場合）
+    > :global(*) + :global(*) {
+      margin-block-start: var(--space, 1rem);
+    }
+    
+    // gap属性を処理
+    &:global([gap]) {
+      --space: 1rem; /* デフォルト値 */
+    }
+    
+    // スペーシングシステムの適用
+    @include space-variables;
+    
+    // 二次元ギャップのサポート
+    &:global([data-main-gap]) {
+      // 主軸方向のギャップ処理コード
+    }
+    
+    &:global([data-cross-gap]) {
+      // 交差軸方向のギャップ処理コード
+    }
+  }
+</style>
+```
+
+この二つのアプローチを使用することで、様々なレイアウトパターンに最適なギャップ制御を実装できます。コンポーネントの特性に合わせて適切な方法を選択してください。
