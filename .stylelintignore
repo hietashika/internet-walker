@@ -1,1 +1,15 @@
 _reset.css
+
+# ビルド生成物を除外
+dist/
+.astro/
+
+# node_modulesは除外
+node_modules/
+
+# キャッシュディレクトリ
+.cache/
+
+# その他の一時ファイル
+.temp/
+.tmp/
