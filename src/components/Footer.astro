@@ -1,6 +1,23 @@
 ---
+interface Props {
+	class?: string;
+}
+
+const { class: className, ...rest } = Astro.props as Props;
 ---
 
-<footer>
+<footer class={className} {...rest}>
 	<p>フッター</p>
 </footer>
+
+<style lang="scss">
+	footer {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding-block: var(--space-m);
+		background-color: #f0f0f0;
+	}
+</style>
+
+
