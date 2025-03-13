@@ -1,0 +1,11 @@
+{
+  "taskExplorer.enabledTasks": {
+    "npm": true,
+    "package.json": true,
+    "astro": true
+  },
+  "taskExplorer.exclude": ["**/node_modules/**", "**/dist/**"],
+  "taskExplorer.showLastTasks": true,
+  "taskExplorer.autoDetect": true,
+  "taskExplorer.groupLevel": 2
+}

@@ -16,11 +16,97 @@
   "editor.formatOnSave": false,
   // フォーマッターのデフォルトのフォーマッターをbiomeにする
   "editor.defaultFormatter": "biomejs.biome",
-  // stylelintのルールが適用されるファイルタイプを指定
-  "[css][scss][astro]": {
+  // CSSとSCSSファイルの設定
+  "[css][scss]": {
     "editor.formatOnSave": false,
     "editor.codeActionsOnSave": {
       "source.fixAll.stylelint": "always"
     }
-  }
+  },
+  // Astroファイルの設定
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "always"
+    }
+  },
+  
+  // Task Explorer設定
+  "taskExplorer.enabledTasks": {
+    "npm": true,
+    "ant": false,
+    "bash": false,
+    "composer": false,
+    "gradle": false,
+    "grunt": false,
+    "gulp": false,
+    "make": false,
+    "maven": false,
+    "perl": false,
+    "pipenv": false,
+    "python": false,
+    "ruby": false,
+    "tsc": false
+  },
+  "taskExplorer.exclude": ["**/node_modules/**", "**/dist/**"],
+  "taskExplorer.showLastTasks": true,
+  // Markdown Preview設定
+  "markdown-preview-enhanced.previewTheme": "github-light.css",
+  "markdown-preview-enhanced.mermaidTheme": "default",
+  "markdown-preview-enhanced.codeBlockTheme": "github.css",
+  "markdown-preview-enhanced.breakOnSingleNewLine": true,
+  "markdown-preview-enhanced.enableExtendedTableSyntax": true,
+  "markdown-preview-enhanced.enableScriptExecution": false,
+  "markdown-preview-enhanced.frontMatterRenderingOption": "table",
+  "markdown-preview-enhanced.usePandocParser": false,
+  // Markdownファイルの設定
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    }
+  },
+  // ファイル関連付け
+  "files.associations": {
+    "*.mdc": "markdown"
+  },
+  "cssVariables.blacklistFolders": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/node_modules",
+    "**/bower_components",
+    "**/tmp",
+    "**/dist",
+    "**/tests"
+  ],
+  "cssVariables.languages": [
+    "astro",
+    "scss",
+    "postcss",
+    "less",
+    "css",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "source.css.styled"
+  ],
+  "cssVariables.lookupFiles": [
+    "**/*.css",
+    "**/*.scss",
+    "**/*.astro"
+  ],
+  "cssVariables.trace.server": "messages",
+  "taskExplorer.disableAnimatedIcons": false,
+  "eslint.lintTask.enable": true,
+  "eslint.lintTask.options": "npx stylelint \"**/*.{css,scss,html,astro}\" --fix",
+  "taskExplorer.enableSideBar": true
 }
