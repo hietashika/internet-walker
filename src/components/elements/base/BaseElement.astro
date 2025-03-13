@@ -42,6 +42,12 @@ interface Props {
   gap?: string;
 
   /**
+   * サイズ値
+   * 数値として渡された場合、スペーシングシステムの値に変換されます
+   */
+  size?: string;
+
+  /**
    * その他の属性を許可
    */
   [key: string]: any;
@@ -54,14 +60,16 @@ const {
   padding,
   margin,
   gap,
+  size,
   ...rest
 } = Astro.props;
 
-// スペーシングクラスを生成
+// クラスを生成( )
 const spacingClasses = getSpacingClasses({ padding, margin });
 
 // ギャップクラスを生成（存在する場合のみ）
 const gapClasses = gap ? getGapClasses(gap) : [];
+const sizeClasses = size ? getSpacingClasses({ size }) : [];
 ---
 
 <Element
@@ -69,6 +77,7 @@ const gapClasses = gap ? getGapClasses(gap) : [];
     componentClass,
     ...spacingClasses,
     ...(Array.isArray(gapClasses) ? gapClasses : []),
+    ...(Array.isArray(sizeClasses) ? sizeClasses : []),
     className
   ]}
   {...rest}

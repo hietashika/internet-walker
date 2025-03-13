@@ -1,11 +1,14 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import Link from "@components/elements/Link.astro";
+import GridStack from "@components/elements/GridStack.astro";
+import Input from "@components/elements/Input.astro";
 ---
 
 <Layout pageTitle="Home">
-	<Link href="/">
-		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<GridStack gap="2">
+		<Link href="/" gap="2">
+			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M10 10L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
       <path d="M15 10L10 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 		</svg>
@@ -16,6 +19,8 @@ import Link from "@components/elements/Link.astro";
       <path d="M10 10L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
       <path d="M15 10L10 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 		</svg>
-		<span>Link</span>
-	</Link>
+			<span>Link</span>
+		</Link>
+	</GridStack>
+	<Input type="in"/>
 </Layout>

@@ -1,0 +1,122 @@
+---
+import BaseElement from "./base/BaseElement.astro";
+
+interface Props {
+  class?: string;
+  type?: "in" | "out";
+  inputType?: string;
+  inputId?: string;
+  inputPlaceholder?: string;
+  [key: string]: any;
+}
+
+const {
+  inputType = "text",
+  inputId = "id",
+  inputPlaceholder = "placeholder",
+  buttonType = "submit",
+  buttonAriaLabel = "Submit",
+  type = "in",
+  Element = "form",
+  ...rest
+} = Astro.props as Props;
+
+const baseProps = {
+  Element,
+  componentClass: "input",
+  class: [type === "in" ? "input--in" : "input--out"].filter(Boolean).join(" "),
+  ...rest,
+};
+---
+
+<BaseElement {...baseProps}>
+  <label for={inputId} class="input__label">
+    <slot name="label">Label</slot>
+  </label>
+  <input
+    type={inputType as any}
+    id={inputId}
+    placeholder={inputPlaceholder}
+  />
+  <button
+    type={buttonType as any}
+    aria-label={buttonAriaLabel}
+    class="input__button"
+  >
+    <slot name="button">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M9 9L15 15"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+        <path
+          d="M15 9L9 15"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </slot>
+  </button>
+</BaseElement>
+
+<style lang="scss">
+  @use "../../styles/tools/mixin" as mix;
+
+  .input {
+    display: grid;
+    gap: var(--input-gap, var(--space-2xs));
+    align-items: center;
+
+    svg {
+      width: var(--input-icon-size, var(--space-l));
+      height: var(--input-icon-size, var(--space-l));
+    }
+
+    @include mix.spacing-classes("--input-gap", "gap");
+    @include mix.spacing-classes("--input-padding", "padding");
+    @include mix.spacing-classes("--input-icon-size", "size");
+
+    &--in {
+      grid-template-columns: auto 1fr;
+
+      > :global(button) {
+        grid-column: 1;
+        grid-row: 1;
+        border: none;
+        background: transparent;
+        color: var(--color-text-low);
+        cursor: pointer;
+      }
+
+      > :global(input) {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        padding-inline-start: calc(var(--input-icon-size, var(--space-l)) + var(--input-padding, var(--space-s)));
+      }
+    }
+
+    &--out {
+      grid-template-columns: 1fr auto;
+      
+      > :global(button) {
+        grid-column: 2;
+        grid-row: 1;
+        border: none;
+        background: var(--color-primary);
+        color: white;
+      }
+      }
+    }
+
+
+  .input__label {
+    display: none;
+  }
+</style>

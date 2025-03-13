@@ -4,17 +4,17 @@
  * 
  * @param value - 属性値（例：'1', '-2', '3'）
  * @param prefix - クラス名のプレフィックス（例：'padding', 'margin', 'gap'）
- * @returns 生成されたクラス名（例：'padding-1', 'margin-neg-2'）
+ * @returns 生成されたクラス名（例：'padding--1', 'margin--neg2'）
  */
 export function getSpacingClass(value: string | undefined, prefix: string): string {
   if (!value) return '';
   
   // マイナス値の処理
   if (value.startsWith('-')) {
-    return `${prefix}-neg-${value.substring(1)}`;
+    return `${prefix}--neg${value.substring(1)}`;
   }
   
-  return `${prefix}-${value}`;
+  return `${prefix}--${value}`;
 }
 
 /**
@@ -41,15 +41,15 @@ export function getGapClasses(
   value: string | undefined, 
   options: { 
     useDimensionalProps?: boolean;       // trueの場合row-gap/column-gap属性を使用、falseの場合クラス名を使用
-    rowPrefix?: string;                  // 行方向のプロパティ名・クラス名（デフォルト: 'row-gap'）
-    columnPrefix?: string;               // 列方向のプロパティ名・クラス名（デフォルト: 'column-gap'）
+    rowPrefix?: string;                  // 行方向のプロパティ名・クラス名（デフォルト: 'rowGap'）
+    columnPrefix?: string;               // 列方向のプロパティ名・クラス名（デフォルト: 'columnGap'）
     defaultPrefix?: string;              // 単一値の場合のプロパティ名・クラス名（デフォルト: 'gap'）
   } = {}
 ): string[] | Record<string, string> {
   const { 
     useDimensionalProps = false,
-    rowPrefix = 'row-gap', 
-    columnPrefix = 'column-gap', 
+    rowPrefix = 'rowGap', 
+    columnPrefix = 'columnGap', 
     defaultPrefix = 'gap' 
   } = options;
   
