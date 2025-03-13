@@ -1,17 +1,26 @@
 {
   // stylelintの拡張機能の対象にするファイルの拡張子
-  "stylelint.validate": ["css", "scss", "html", "astro"],
-
+  "stylelint.validate": [
+    "css",
+    "scss",
+    "html",
+    "astro"
+  ],
   // 保存時に自動で --fix するように
   "editor.codeActionsOnSave": {
-    "source.fixAll.stylelint": "explicit",
-    "source.organizeImports.biome": "explicit",
-    
-    "quickfix.biome": "explicit",
+    "source.fixAll.stylelint": "always",
+    "source.organizeImports.biome": "always",
+    "quickfix.biome": "always"
   },
   // 保存時に自動でフォーマットするように
   "editor.formatOnSave": true,
   // フォーマッターのデフォルトのフォーマッターをbiomeにする
   "editor.defaultFormatter": "biomejs.biome",
-  
+  // stylelintのルールが適用されるファイルタイプを指定
+  "[css][scss][astro]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "always"
+    }
+  }
 }
