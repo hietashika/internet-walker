@@ -12,13 +12,13 @@
     "source.organizeImports.biome": "always",
     "quickfix.biome": "always"
   },
-  // 保存時に自動でフォーマットするように
-  "editor.formatOnSave": true,
+  // 自動で保存しないように
+  "editor.formatOnSave": false,
   // フォーマッターのデフォルトのフォーマッターをbiomeにする
   "editor.defaultFormatter": "biomejs.biome",
   // stylelintのルールが適用されるファイルタイプを指定
   "[css][scss][astro]": {
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
     "editor.codeActionsOnSave": {
       "source.fixAll.stylelint": "always"
     }
