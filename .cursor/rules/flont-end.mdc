@@ -1,6 +1,7 @@
 ---
 description: フロントエンドの実装をする際に読むドキュメント
 globs: **/*
+alwaysApply: false
 ---
 # フロントエンドのディレクトリ構成
 
@@ -75,13 +76,40 @@ ITCSSの設計思想に基づいて、カスケードレイヤーを採用して
 メディアクエリに依存しない柔軟なレイアウトを優先します。
 EveryLayoutや、CSS Gridを活用してください。
 
+### レスポンシブタイポグラフィ
+
+このプロジェクトでは、レスポンシブなタイポグラフィを実装するために`responsive-font-size`ミックスインを使用します。
+このミックスインは、ビューポートの幅に応じてフォントサイズを調整するために`clamp()`関数を活用しています。
+
+```scss
+@mixin responsive-font-size($min, $max, $vw-factor: 1vw) {
+  font-size: clamp(#{$min}, calc(#{$min} + #{$vw-factor}), #{$max});
+}
+```
+
+このミックスインは以下のパラメータを受け取ります：
+- `$min`: 最小フォントサイズ（変数または直接値）
+- `$max`: 最大フォントサイズ（変数または直接値）
+- `$vw-factor`: ビューポート幅に対する係数（デフォルト: 1vw）
+
+#### 使用例
+
+```scss
+// 16px 〜 24pxの範囲でレスポンシブに変化
+@include mix.responsive-font-size(var(--font-size-m), var(--font-size-2xl));
+
+// カスタムビューポート係数を使用
+@include mix.responsive-font-size(var(--font-size-m), var(--font-size-2xl), 2vw);
+
+// 直接値で指定
+@include mix.responsive-font-size(1rem, 1.5rem);
+```
+
+見出しなどの重要なテキスト要素には、このミックスインを使用してレスポンシブなフォントサイズを設定してください。これにより、小さな画面では読みやすい適切なサイズを維持しながら、大きな画面ではより視覚的なインパクトを与えることができます。
 
 #### 命名規則
 命名規則は下記の通りにしてください:
 .blockName__elemenName--modifierName
-
-
-
 
 ### reset.css
 Reset.cssはdestyle.cssを採用。
