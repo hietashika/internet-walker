@@ -22,6 +22,7 @@ $white-disabled: rgb(255 255 255 / 26%);
 	--color-background-high: #{$white-high};
 	--color-background-middle: #{$alto-010};
 	--color-background-low: #{$alto-020};
+	--color-border: #{$alto-010};
 
 	// フォントサイズ
 	--font-size-base: 1rem; // 16px - 基準サイズ
@@ -57,9 +58,9 @@ $white-disabled: rgb(255 255 255 / 26%);
 	// 余白変数（8ポイントグリッドシステムに基づく）
 	
 	// 非常に小さいスペース（4px〜12px）
-	--space-3xs: calc(var(--space-base) * 0.25); // 4px
-	--space-2xs: calc(var(--space-base) * 0.5); // 8px
-	--space-xs: calc(var(--space-base) * 0.75); // 12px
+	--space-2xs: calc(var(--space-base) * 0.25); // 4px
+	--space-xs: calc(var(--space-base) * 0.5); // 8px
+	--space-s: calc(var(--space-base) * 0.75); // 12px
 	
 	// 基本的なスペース（16px〜32px）
 	--space-m: var(--space-base); // 16px - 基準サイズ

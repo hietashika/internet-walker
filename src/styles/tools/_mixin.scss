@@ -1,9 +1,9 @@
 // スペーシングシステム
 @mixin space-variables {
   // 非常に小さいスペース
-  &:global([gap="-3"]) { --space: var(--space-3xs); } // 4px
-  &:global([gap="-2"]) { --space: var(--space-2xs); } // 8px
-  &:global([gap="-1"]) { --space: var(--space-xs); } // 12px
+  &:global([gap="-3"]) { --space: var(--space-2xs); } // 4px
+  &:global([gap="-2"]) { --space: var(--space-xs); } // 8px
+  &:global([gap="-1"]) { --space: var(--space-s); } // 12px
   
   // 基本的なスペース
   &:global([gap="0"]) { --space: 0; } // スペースなし
@@ -26,9 +26,9 @@
 // 親子関係のスタイルルール（入れ子のコンポーネント用）
 @mixin nested-space-variables {
   // 非常に小さいスペース
-  :global(.stack[gap="-3"] > .stack) { margin-block-start: var(--space-3xs) !important; } // 4px
-  :global(.stack[gap="-2"] > .stack) { margin-block-start: var(--space-2xs) !important; } // 8px
-  :global(.stack[gap="-1"] > .stack) { margin-block-start: var(--space-xs) !important; } // 12px
+  :global(.stack[gap="-3"] > .stack) { margin-block-start: var(--space-2xs) !important; } // 4px
+  :global(.stack[gap="-2"] > .stack) { margin-block-start: var(--space-s) !important; } // 8px
+  :global(.stack[gap="-1"] > .stack) { margin-block-start: var(--space-m) !important; } // 12px
   
   // 基本的なスペース
   :global(.stack[gap="0"] > .stack) { margin-block-start: 0 !important; } // スペースなし
@@ -56,26 +56,26 @@
   $selector-text: if($selector != '', '#{$selector}', '');
   
   // 非常に小さいスペース
-  &.#{$prefix}-neg-3#{$selector-text} { #{$property}: var(--space-3xs); } // 4px
-  &.#{$prefix}-neg-2#{$selector-text} { #{$property}: var(--space-2xs); } // 8px
-  &.#{$prefix}-neg-1#{$selector-text} { #{$property}: var(--space-xs); } // 12px
+  &.#{$prefix}--neg3#{$selector-text} { #{$property}: var(--space-2xs); } // 4px
+  &.#{$prefix}--neg2#{$selector-text} { #{$property}: var(--space-xs); } // 8px
+  &.#{$prefix}--neg1#{$selector-text} { #{$property}: var(--space-s); } // 12px
   
   // 基本的なスペース
-  &.#{$prefix}-0#{$selector-text} { #{$property}: 0; } // スペースなし
-  &.#{$prefix}-1#{$selector-text} { #{$property}: var(--space-m); } // 16px - 基準サイズ
-  &.#{$prefix}-2#{$selector-text} { #{$property}: var(--space-l); } // 24px
-  &.#{$prefix}-3#{$selector-text} { #{$property}: var(--space-xl); } // 32px
+  &.#{$prefix}--0#{$selector-text} { #{$property}: 0; } // スペースなし
+  &.#{$prefix}--1#{$selector-text} { #{$property}: var(--space-m); } // 16px - 基準サイズ
+  &.#{$prefix}--2#{$selector-text} { #{$property}: var(--space-l); } // 24px
+  &.#{$prefix}--3#{$selector-text} { #{$property}: var(--space-xl); } // 32px
   
   // 大きいスペース
-  &.#{$prefix}-4#{$selector-text} { #{$property}: var(--space-2xl); } // 48px
-  &.#{$prefix}-5#{$selector-text} { #{$property}: var(--space-3xl); } // 64px
-  &.#{$prefix}-6#{$selector-text} { #{$property}: var(--space-4xl); } // 96px
-  &.#{$prefix}-7#{$selector-text} { #{$property}: var(--space-5xl); } // 128px
+  &.#{$prefix}--4#{$selector-text} { #{$property}: var(--space-2xl); } // 48px
+  &.#{$prefix}--5#{$selector-text} { #{$property}: var(--space-3xl); } // 64px
+  &.#{$prefix}--6#{$selector-text} { #{$property}: var(--space-4xl); } // 96px
+  &.#{$prefix}--7#{$selector-text} { #{$property}: var(--space-5xl); } // 128px
   
   // 非常に大きいスペース
-  &.#{$prefix}-8#{$selector-text} { #{$property}: var(--space-6xl); } // 192px
-  &.#{$prefix}-9#{$selector-text} { #{$property}: var(--space-7xl); } // 256px
-  &.#{$prefix}-10#{$selector-text} { #{$property}: var(--space-8xl); } // 384px
+  &.#{$prefix}--8#{$selector-text} { #{$property}: var(--space-6xl); } // 192px
+  &.#{$prefix}--9#{$selector-text} { #{$property}: var(--space-7xl); } // 256px
+  &.#{$prefix}--10#{$selector-text} { #{$property}: var(--space-8xl); } // 384px
 }
 
 // 二次元ギャップ処理用ミックスイン
@@ -88,60 +88,60 @@
   @include spacing-classes($base-property, "gap");
   
   // 二次元ギャップ値用
-  @include spacing-classes($row-property, "row-gap");
-  @include spacing-classes($column-property, "column-gap");
+  @include spacing-classes($row-property, "rowgap");
+  @include spacing-classes($column-property, "columngap");
   
   // row-gapが指定されている場合
-  &.row-gap-0,
-  &.row-gap-1,
-  &.row-gap-2,
-  &.row-gap-3,
-  &.row-gap-4,
-  &.row-gap-5,
-  &.row-gap-6,
-  &.row-gap-7,
-  &.row-gap-8,
-  &.row-gap-9,
-  &.row-gap-10,
-  &.row-gap-neg-1,
-  &.row-gap-neg-2,
-  &.row-gap-neg-3 {
+  &.rowgap--0,
+  &.rowgap--1,
+  &.rowgap--2,
+  &.rowgap--3,
+  &.rowgap--4,
+  &.rowgap--5,
+  &.rowgap--6,
+  &.rowgap--7,
+  &.rowgap--8,
+  &.rowgap--9,
+  &.rowgap--10,
+  &.rowgap--neg1,
+  &.rowgap--neg2,
+  &.rowgap--neg3 {
     row-gap: var(#{$row-property});
   }
 
   // column-gapが指定されている場合
-  &.column-gap-0,
-  &.column-gap-1,
-  &.column-gap-2,
-  &.column-gap-3,
-  &.column-gap-4,
-  &.column-gap-5,
-  &.column-gap-6,
-  &.column-gap-7,
-  &.column-gap-8,
-  &.column-gap-9,
-  &.column-gap-10,
-  &.column-gap-neg-1,
-  &.column-gap-neg-2,
-  &.column-gap-neg-3 {
+  &.columngap--0,
+  &.columngap--1,
+  &.columngap--2,
+  &.columngap--3,
+  &.columngap--4,
+  &.columngap--5,
+  &.columngap--6,
+  &.columngap--7,
+  &.columngap--8,
+  &.columngap--9,
+  &.columngap--10,
+  &.columngap--neg1,
+  &.columngap--neg2,
+  &.columngap--neg3 {
     column-gap: var(#{$column-property});
   }
   
   // 両方のギャップが指定されている場合、個別のプロパティを使用し通常のgapは無効化
-  &.gap-0,
-  &.gap-1,
-  &.gap-2,
-  &.gap-3,
-  &.gap-4,
-  &.gap-5,
-  &.gap-6,
-  &.gap-7,
-  &.gap-8,
-  &.gap-9,
-  &.gap-10,
-  &.gap-neg-1,
-  &.gap-neg-2,
-  &.gap-neg-3 {
+  &.gap--0,
+  &.gap--1,
+  &.gap--2,
+  &.gap--3,
+  &.gap--4,
+  &.gap--5,
+  &.gap--6,
+  &.gap--7,
+  &.gap--8,
+  &.gap--9,
+  &.gap--10,
+  &.gap--neg1,
+  &.gap--neg2,
+  &.gap--neg3 {
     gap: var(#{$base-property});
   }
   
@@ -150,31 +150,31 @@
   @at-root {
     %has-dimensional-gap {
       @for $i from -3 through 10 {
-        $suffix: if($i < 0, 'neg-#{abs($i)}', '#{$i}');
+        $suffix: if($i < 0, 'neg#{abs($i)}', '#{$i}');
 
         @if $i != -3 and $i != -2 and $i != -1 and $i != 5 and $i != 7 and $i != 9 {
-          &.row-gap-#{$suffix},
-          &.column-gap-#{$suffix} {
+          &.rowgap--#{$suffix},
+          &.columngap--#{$suffix} {
             @content;
           }
         }
       }
     }
     
-    #{&}.gap-0,
-    #{&}.gap-1,
-    #{&}.gap-2,
-    #{&}.gap-3,
-    #{&}.gap-4,
-    #{&}.gap-5,
-    #{&}.gap-6,
-    #{&}.gap-7,
-    #{&}.gap-8,
-    #{&}.gap-9,
-    #{&}.gap-10,
-    #{&}.gap-neg-1,
-    #{&}.gap-neg-2,
-    #{&}.gap-neg-3 {
+    #{&}.gap--0,
+    #{&}.gap--1,
+    #{&}.gap--2,
+    #{&}.gap--3,
+    #{&}.gap--4,
+    #{&}.gap--5,
+    #{&}.gap--6,
+    #{&}.gap--7,
+    #{&}.gap--8,
+    #{&}.gap--9,
+    #{&}.gap--10,
+    #{&}.gap--neg1,
+    #{&}.gap--neg2,
+    #{&}.gap--neg3 {
       @extend %has-dimensional-gap;
 
       gap: initial;
