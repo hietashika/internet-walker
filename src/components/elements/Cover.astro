@@ -7,42 +7,42 @@
 import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
-  class?: string;
-  Element?: keyof HTMLElementTagNameMap;
-  padding?: string;
-  gap?: string;
-  height?: string;
-  [key: string]: any;
+	class?: string;
+	Element?: keyof HTMLElementTagNameMap;
+	padding?: string;
+	gap?: string;
+	height?: string;
+	[key: string]: any;
 }
 
 const {
-  class: className,
-  Element = "div",
-  padding,
-  gap,
-  height,
-  ...rest
+	class: className,
+	Element = "div",
+	padding,
+	gap,
+	height,
+	...rest
 } = Astro.props as Props;
 
 // 基本コンポーネントに渡すプロパティを準備
 const baseProps = {
-  componentClass: "cover",
-  class: className,
-  Element,
-  padding,
-  gap,
-  "data-height": height || null,
-  ...rest,
+	componentClass: "cover",
+	class: className,
+	Element,
+	padding,
+	gap,
+	"data-height": height || null,
+	...rest,
 };
 
 // スロットの中身を確認するためのヘルパー関数
 const hasSlotContent = (slotName: string | null) => {
-  // デフォルトスロット
-  if (slotName === null) {
-    return Astro.slots.has("default");
-  }
-  // 名前付きスロット
-  return Astro.slots.has(slotName);
+	// デフォルトスロット
+	if (slotName === null) {
+		return Astro.slots.has("default");
+	}
+	// 名前付きスロット
+	return Astro.slots.has(slotName);
 };
 
 // 各スロットの存在確認

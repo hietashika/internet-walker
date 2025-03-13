@@ -2,30 +2,30 @@
 import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
-  class?: string;
-  type?: "in" | "out";
-  inputType?: string;
-  inputId?: string;
-  inputPlaceholder?: string;
-  [key: string]: any;
+	class?: string;
+	type?: "in" | "out";
+	inputType?: string;
+	inputId?: string;
+	inputPlaceholder?: string;
+	[key: string]: any;
 }
 
 const {
-  inputType = "text",
-  inputId = "id",
-  inputPlaceholder = "placeholder",
-  buttonType = "submit",
-  buttonAriaLabel = "Submit",
-  type = "in",
-  Element = "form",
-  ...rest
+	inputType = "text",
+	inputId = "id",
+	inputPlaceholder = "placeholder",
+	buttonType = "submit",
+	buttonAriaLabel = "Submit",
+	type = "in",
+	Element = "form",
+	...rest
 } = Astro.props as Props;
 
 const baseProps = {
-  Element,
-  componentClass: "input",
-  class: [type === "in" ? "input--in" : "input--out"].filter(Boolean).join(" "),
-  ...rest,
+	Element,
+	componentClass: "input",
+	class: [type === "in" ? "input--in" : "input--out"].filter(Boolean).join(" "),
+	...rest,
 };
 ---
 

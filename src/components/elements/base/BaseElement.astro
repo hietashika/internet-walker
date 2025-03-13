@@ -5,63 +5,63 @@
  *
  * スペーシング関連の共通機能を提供し、コード重複を削減します
  */
-import { getSpacingClasses, getGapClasses } from "../../../utils/spacing";
+import { getGapClasses, getSpacingClasses } from "../../../utils/spacing";
 
 interface Props {
-  /**
-   * コンポーネント固有のクラス名
-   */
-  componentClass: string;
+	/**
+	 * コンポーネント固有のクラス名
+	 */
+	componentClass: string;
 
-  /**
-   * 追加のクラス名
-   */
-  class?: string;
+	/**
+	 * 追加のクラス名
+	 */
+	class?: string;
 
-  /**
-   * 使用するHTML要素
-   */
-  Element?: keyof HTMLElementTagNameMap;
+	/**
+	 * 使用するHTML要素
+	 */
+	Element?: keyof HTMLElementTagNameMap;
 
-  /**
-   * パディング値
-   * 数値として渡された場合、スペーシングシステムの値に変換されます
-   */
-  padding?: string;
+	/**
+	 * パディング値
+	 * 数値として渡された場合、スペーシングシステムの値に変換されます
+	 */
+	padding?: string;
 
-  /**
-   * マージン値
-   * 数値として渡された場合、スペーシングシステムの値に変換されます
-   */
-  margin?: string;
+	/**
+	 * マージン値
+	 * 数値として渡された場合、スペーシングシステムの値に変換されます
+	 */
+	margin?: string;
 
-  /**
-   * ギャップ値（単一または二次元）
-   * 単一値または "2 3" のようなスペース区切りの値として渡すことができます
-   */
-  gap?: string;
+	/**
+	 * ギャップ値（単一または二次元）
+	 * 単一値または "2 3" のようなスペース区切りの値として渡すことができます
+	 */
+	gap?: string;
 
-  /**
-   * サイズ値
-   * 数値として渡された場合、スペーシングシステムの値に変換されます
-   */
-  size?: string;
+	/**
+	 * サイズ値
+	 * 数値として渡された場合、スペーシングシステムの値に変換されます
+	 */
+	size?: string;
 
-  /**
-   * その他の属性を許可
-   */
-  [key: string]: any;
+	/**
+	 * その他の属性を許可
+	 */
+	[key: string]: any;
 }
 
 const {
-  componentClass,
-  class: className,
-  Element = "div",
-  padding,
-  margin,
-  gap,
-  size,
-  ...rest
+	componentClass,
+	class: className,
+	Element = "div",
+	padding,
+	margin,
+	gap,
+	size,
+	...rest
 } = Astro.props;
 
 // クラスを生成( )

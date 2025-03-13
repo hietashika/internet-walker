@@ -7,19 +7,31 @@
 import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
-  class?: string;
-  gap?: string;
-  vertical?: boolean;
-  horizontal?: boolean;
-  [key: string]: any;
+	class?: string;
+	gap?: string;
+	vertical?: boolean;
+	horizontal?: boolean;
+	[key: string]: any;
 }
 
-const { class: className, gap, vertical, horizontal, ...rest } = Astro.props as Props;
+const {
+	class: className,
+	gap,
+	vertical,
+	horizontal,
+	...rest
+} = Astro.props as Props;
 
 const baseProps = {
-  componentClass: "grid-stack",
-  class: [className, gap ? "grid-stack--gap" : "", horizontal ? "grid-stack--horizontal" : "grid-stack--vertical",].filter(Boolean).join(" "),
-  ...rest,
+	componentClass: "grid-stack",
+	class: [
+		className,
+		gap ? "grid-stack--gap" : "",
+		horizontal ? "grid-stack--horizontal" : "grid-stack--vertical",
+	]
+		.filter(Boolean)
+		.join(" "),
+	...rest,
 };
 ---
 

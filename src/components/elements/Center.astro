@@ -8,38 +8,42 @@
 import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
-  class?: string;
-  Element?: keyof HTMLElementTagNameMap;
-  max?: string;
-  padding?: string;
-  intrinsic?: boolean;
-  style?: string;
-  andText?: boolean;
-  /**
-   * その他の属性を許可
-   */
-  [key: string]: any;
+	class?: string;
+	Element?: keyof HTMLElementTagNameMap;
+	max?: string;
+	padding?: string;
+	intrinsic?: boolean;
+	style?: string;
+	andText?: boolean;
+	/**
+	 * その他の属性を許可
+	 */
+	[key: string]: any;
 }
 
 const {
-  class: className,
-  Element = "div",
-  max,
-  padding,
-  intrinsic,
-  andText,
-  ...rest
+	class: className,
+	Element = "div",
+	max,
+	padding,
+	intrinsic,
+	andText,
+	...rest
 } = Astro.props as Props;
 
 // 基本コンポーネントに渡すプロパティを準備
 const baseProps = {
-  componentClass: "center",
-  class: [intrinsic ? "intrinsic" : "", andText ? "center__text" : "", className]
-    .filter(Boolean)
-    .join(" "),
-  Element,
-  padding,
-  ...rest,
+	componentClass: "center",
+	class: [
+		intrinsic ? "intrinsic" : "",
+		andText ? "center__text" : "",
+		className,
+	]
+		.filter(Boolean)
+		.join(" "),
+	Element,
+	padding,
+	...rest,
 };
 ---
 

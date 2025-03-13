@@ -8,25 +8,25 @@
 import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
-  class?: string;
-  Element?: keyof HTMLElementTagNameMap;
-  gap?: string;
-  side?: "left" | "right";
-  min?: string; // 最小幅を指定するためのプロパティ
-  width?: string; // サイドバーの幅を指定するためのプロパティ
-  noStretch?: boolean;
-  [key: string]: any;
+	class?: string;
+	Element?: keyof HTMLElementTagNameMap;
+	gap?: string;
+	side?: "left" | "right";
+	min?: string; // 最小幅を指定するためのプロパティ
+	width?: string; // サイドバーの幅を指定するためのプロパティ
+	noStretch?: boolean;
+	[key: string]: any;
 }
 
 const {
-  class: className,
-  Element = "div",
-  gap,
-  side = "left",
-  min,
-  width,
-  noStretch,
-  ...rest
+	class: className,
+	Element = "div",
+	gap,
+	side = "left",
+	min,
+	width,
+	noStretch,
+	...rest
 } = Astro.props as Props;
 
 // ユニークなIDを生成
@@ -34,21 +34,21 @@ const uniqueId = `sidebar-${Math.random().toString(36).substring(2, 9)}`;
 
 // 基本コンポーネントに渡すプロパティを準備
 const baseProps = {
-  componentClass: "sidebar",
-  class: [
-    `sidebar--${side}`,
-    width ? "sidebar--sideWidth" : "",
-    noStretch ? "sidebar--noStretch" : "",
-    uniqueId,
-    className,
-  ]
-    .filter(Boolean)
-    .join(" "),
-  Element,
-  gap,
-  "data-min": min || null,
-  "data-width": width || null,
-  ...rest,
+	componentClass: "sidebar",
+	class: [
+		`sidebar--${side}`,
+		width ? "sidebar--sideWidth" : "",
+		noStretch ? "sidebar--noStretch" : "",
+		uniqueId,
+		className,
+	]
+		.filter(Boolean)
+		.join(" "),
+	Element,
+	gap,
+	"data-min": min || null,
+	"data-width": width || null,
+	...rest,
 };
 ---
 

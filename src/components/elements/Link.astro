@@ -17,9 +17,20 @@ interface Props {
 	[key: string]: any;
 }
 
-const { class: className, href, vertical, horizontal, Element = "a", ...rest } = Astro.props as Props;
+const {
+	class: className,
+	href,
+	vertical,
+	horizontal,
+	Element = "a",
+	...rest
+} = Astro.props as Props;
 
-const layoutClass = vertical ? "link--vertical" : horizontal ? "link--horizontal" : "link--horizontal";
+const layoutClass = vertical
+	? "link--vertical"
+	: horizontal
+		? "link--horizontal"
+		: "link--horizontal";
 
 const baseProps = {
 	componentClass: "link",

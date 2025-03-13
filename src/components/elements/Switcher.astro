@@ -8,29 +8,29 @@
 import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
-  class?: string;
-  Element?: keyof HTMLElementTagNameMap;
-  threshold?: string;
-  gap?: string;
-  [key: string]: any;
+	class?: string;
+	Element?: keyof HTMLElementTagNameMap;
+	threshold?: string;
+	gap?: string;
+	[key: string]: any;
 }
 
 const {
-  class: className,
-  Element = "div",
-  threshold,
-  gap,
-  ...rest
+	class: className,
+	Element = "div",
+	threshold,
+	gap,
+	...rest
 } = Astro.props as Props;
 
 // 基本コンポーネントに渡すプロパティを準備
 const baseProps = {
-  componentClass: "switcher",
-  class: className,
-  Element,
-  gap,
-  "data-threshold": threshold || null,
-  ...rest,
+	componentClass: "switcher",
+	class: className,
+	Element,
+	gap,
+	"data-threshold": threshold || null,
+	...rest,
 };
 ---
 
