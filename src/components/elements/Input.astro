@@ -43,7 +43,7 @@ const baseProps = {
     aria-label={buttonAriaLabel}
     class="input__button"
   >
-    <slot name="button">
+    <slot name="icon">
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -71,7 +71,7 @@ const baseProps = {
 
   .input {
     display: grid;
-    gap: var(--input-gap, var(--space-2xs));
+    gap: var(--input-gap, var(--space-xs));
     align-items: center;
 
     svg {
