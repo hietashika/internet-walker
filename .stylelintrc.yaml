@@ -32,6 +32,9 @@ rules:
   # <>で囲まれた要素は指摘させない
   scss/operator-no-unspaced: null
 
+  # 演算子の後に改行を許可する
+  scss/operator-no-newline-after: null
+
   # 宣言前の空行
   declaration-empty-line-before:
     - always
