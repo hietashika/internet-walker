@@ -1,3 +1,6 @@
+// mixinをインポート
+@use "../tools/mixin" as mix;
+
 body {
   font-family: "BIZ UDGothic", serif;
 }
@@ -18,7 +21,8 @@ h1 {
   color: var(--color-text-high);
 
   // 24px 〜 32px
-  font-size: clamp(var(--font-size-2xl), calc(var(--font-size-2xl) + 1vw), var(--font-size-3xl));
+  @include mix.responsive-font-size(var(--font-size-2xl), var(--font-size-3xl));
+
   line-height: 1.5;
 }
 
@@ -26,7 +30,8 @@ h2 {
   color: var(--color-text-high);
 
   // 20px 〜 24px
-  font-size: clamp(var(--font-size-xl), calc(var(--font-size-xl) + 1vw), var(--font-size-2xl));
+  @include mix.responsive-font-size(var(--font-size-xl), var(--font-size-2xl));
+
   font-weight: bold;
   line-height: 1.5;
 }
@@ -35,7 +40,8 @@ h3 {
   color: var(--color-text-middle);
 
   // 18px 〜 20px
-  font-size: clamp(var(--font-size-l), calc(var(--font-size-l) + 1vw), var(--font-size-xl));
+  @include mix.responsive-font-size(var(--font-size-l), var(--font-size-xl));
+
   font-weight: bold;
   line-height: 1.5;
 
@@ -45,7 +51,8 @@ h4 {
   color: var(--color-text-middle);
 
   // 16px 〜 18px
-  font-size: clamp(var(--font-size-m), calc(var(--font-size-m) + 1vw), var(--font-size-l));
+  @include mix.responsive-font-size(var(--font-size-m), var(--font-size-l));
+
   line-height: 1.5;
 }
 
