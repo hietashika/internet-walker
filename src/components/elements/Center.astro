@@ -8,17 +8,28 @@
 import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
-	class?: string;
-	Element?: keyof HTMLElementTagNameMap;
-	max?: string;
-	padding?: string;
-	intrinsic?: boolean;
-	style?: string;
-	andText?: boolean;
 	/**
-	 * その他の属性を許可
+	 * 中央寄せの方法
+	 * @default "intrinsic"
 	 */
-	[key: string]: any;
+	type?: "text" | "intrinsic";
+
+	/**
+	 * 最大幅
+	 * @default "container"
+	 */
+	maxWidth?: string;
+
+	/**
+	 * 最小の左右パディング
+	 * @default "1"
+	 */
+	gutter?: string;
+
+	/**
+	 * その他の属性を許可（型安全に）
+	 */
+	[key: string]: unknown;
 }
 
 const {

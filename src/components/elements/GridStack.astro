@@ -11,7 +11,8 @@ interface Props {
 	gap?: string;
 	vertical?: boolean;
 	horizontal?: boolean;
-	[key: string]: any;
+	rows?: string;
+	[key: string]: unknown;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
 	gap,
 	vertical,
 	horizontal,
+	rows,
 	...rest
 } = Astro.props as Props;
 
@@ -41,7 +43,7 @@ const baseProps = {
 
 <style lang="scss">
   @use "../../styles/tools/mixin" as mix;
-  
+
   @include mix.element-base("grid-stack") {
     display: grid;
     gap: var(--grid-stack-gap, var(--space-m));

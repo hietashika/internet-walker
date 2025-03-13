@@ -9,12 +9,15 @@
 import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
+	href: string;
+	external?: boolean;
+	disabled?: boolean;
 	class?: string;
-	href?: string;
+	size?: string;
 	vertical?: boolean;
 	horizontal?: boolean;
 	padding?: string;
-	[key: string]: any;
+	[key: string]: unknown;
 }
 
 const {
@@ -42,32 +45,32 @@ const baseProps = {
 ---
 
 <BaseElement {...baseProps}>
-	<slot />
+  <slot />
 </BaseElement>
 
 <style lang="scss">
-	@use "../../styles/tools/mixin" as mix;
+  @use "../../styles/tools/mixin" as mix;
 
-	@include mix.element-base("link") {
-		display: grid;
+  @include mix.element-base("link") {
+    display: grid;
 
-		// 16px 〜 18px
-		@include mix.responsive-font-size(var(--font-size-m), var(--font-size-l));
+    // 16px 〜 18px
+    @include mix.responsive-font-size(var(--font-size-m), var(--font-size-l));
 
-		&--vertical {
-			gap: var(--link-vertical-gap, var(--space-s));
-			justify-items: center;
+    &--vertical {
+      gap: var(--link-vertical-gap, var(--space-s));
+      justify-items: center;
 
-			@include mix.spacing-classes("--link-vertical-gap", "gap");
-		}
+      @include mix.spacing-classes("--link-vertical-gap", "gap");
+    }
 
-		&--horizontal {
-			grid-template-columns: auto 1fr;
-			grid-auto-flow: column;
-			gap: var(--link-horizontal-gap, var(--space-s));
-			align-items: center;
+    &--horizontal {
+      grid-template-columns: auto 1fr;
+      grid-auto-flow: column;
+      gap: var(--link-horizontal-gap, var(--space-s));
+      align-items: center;
 
-			@include mix.spacing-classes("--link-horizontal-gap", "gap");
-		}
-	}
+      @include mix.spacing-classes("--link-horizontal-gap", "gap");
+    }
+  }
 </style>

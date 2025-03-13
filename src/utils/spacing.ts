@@ -68,7 +68,9 @@ export function getGapClasses(
 		return useDimensionalProps
 			? { [defaultPrefix]: value }
 			: [getSpacingClass(value, defaultPrefix)];
-	} else if (values.length === 2) {
+	}
+
+	if (values.length === 2) {
 		// 2つの値がある場合、row-gapとcolumn-gap
 		const [rowGap, columnGap] = values;
 

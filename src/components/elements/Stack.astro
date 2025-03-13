@@ -11,11 +11,13 @@ interface Props {
 	class?: string;
 	Element?: keyof HTMLElementTagNameMap;
 	gap?: string;
+	recursive?: boolean;
+	split?: boolean;
 	/**
 	 * アクセシビリティ属性
 	 * 必要に応じてaria属性をサポート
 	 */
-	[key: string]: any; // その他の属性を許可
+	[key: string]: unknown; // その他の属性を許可
 }
 
 const {

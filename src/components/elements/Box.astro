@@ -21,9 +21,30 @@ interface Props {
 	surface?: "primary" | "secondary" | "tertiary";
 
 	/**
-	 * その他の属性を許可
+	 * ボーダーを含めるかどうか
 	 */
-	[key: string]: any;
+	border?: boolean;
+
+	/**
+	 * 投影（シャドウ）のサイズ
+	 * @default "0"
+	 */
+	shadow?: "0" | "1" | "2" | "3";
+
+	/**
+	 * ボーダーの色
+	 */
+	borderColor?: string;
+
+	/**
+	 * 背景色
+	 */
+	backgroundColor?: string;
+
+	/**
+	 * その他の属性を許可（型安全に）
+	 */
+	[key: string]: unknown;
 }
 
 const {
