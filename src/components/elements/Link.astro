@@ -1,0 +1,62 @@
+---
+/**
+ * Linkコンポーネント
+ *
+ * リンクを表示するためのコンポーネント
+ * 縦横のレイアウトを切り替えることができる
+ */
+
+import BaseElement from "./base/BaseElement.astro";
+
+interface Props {
+	class?: string;
+	href?: string;
+	vertical?: boolean;
+	horizontal?: boolean;
+	padding?: string;
+	[key: string]: any;
+}
+
+const { class: className, href, vertical, horizontal, Element = "a", ...rest } = Astro.props as Props;
+
+const layoutClass = vertical ? "link--vertical" : horizontal ? "link--horizontal" : "link--horizontal";
+
+const baseProps = {
+	componentClass: "link",
+	Element,
+	class: [layoutClass, className].filter(Boolean).join(" "),
+	href,
+	...rest,
+};
+---
+
+<BaseElement {...baseProps}>
+	<slot />
+</BaseElement>
+
+<style lang="scss">
+	@use "../../styles/tools/mixin" as mix;
+
+	@include mix.element-base("link") {
+		display: grid;
+
+		// 16px 〜 18px
+		@include mix.responsive-font-size(var(--font-size-m), var(--font-size-l));
+
+		&--vertical {
+			gap: var(--link-vertical-gap, var(--space-s));
+			justify-items: center;
+
+			@include mix.spacing-classes("--link-vertical-gap", "gap");
+		}
+
+		&--horizontal {
+			grid-template-columns: auto 1fr;
+			grid-auto-flow: column;
+			gap: var(--link-horizontal-gap, var(--space-s));
+			align-items: center;
+
+			@include mix.spacing-classes("--link-horizontal-gap", "gap");
+		}
+	}
+</style>
