@@ -13,6 +13,9 @@ plugins:
 
 # ルール設定
 rules:
+  # BEM命名規則を強制 (.blockName__elementName--modifierName)
+  selector-class-pattern: ^[a-z][a-zA-Z0-9]*(__[a-z][a-zA-Z0-9]*)?(--[a-z][a-zA-Z0-9]*)?$
+
   # Astroの疑似クラス :global は指摘させない
   selector-pseudo-class-no-unknown:
     - true
