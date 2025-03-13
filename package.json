@@ -6,8 +6,8 @@
 		"dev": "astro dev",
 		"build": "astro build",
 		"preview": "astro preview",
-		"check": "biome check ./src",
-		"fix": "biome check ./src --write",
+		"check": "biome check ./src && stylelint '**/*.{css,scss,html,astro}'",
+		"fix": "biome check ./src --write && stylelint '**/*.{css,scss,html,astro}' --fix",
 		"astro": "astro"
 	},
 	"dependencies": {
