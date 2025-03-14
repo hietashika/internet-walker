@@ -13,8 +13,8 @@ import GridStack from "./elements/GridStack.astro";
   <div class="title">
     <h1>Astro Template</h1>
   </div>
-  <GridStack class="menu" horizontal>
-    <Link href="/" vertical gap="-3">
+  <GridStack horizontal>
+    <Link href="/" vertical gap="-3" class="menuItem">
       <svg width="24" height="24">
         <circle
           cx="12"
@@ -26,7 +26,7 @@ import GridStack from "./elements/GridStack.astro";
       </svg>
       Home</Link
     >
-    <Link href="/about" vertical gap="-3">
+    <Link href="/about" vertical gap="-3" class="menuItem">
       <svg width="24" height="24">
         <circle
           cx="12"
@@ -40,7 +40,7 @@ import GridStack from "./elements/GridStack.astro";
     >
   </GridStack>
 
-  <style>
+  <style lang="scss">
     .header {
       display: grid;
       grid-template-columns: auto 1fr;
@@ -48,6 +48,15 @@ import GridStack from "./elements/GridStack.astro";
       gap: var(--space-xs);
       align-items: center;
       padding: var(--space-m) var(--space-xl);
+    }
+
+    .menuItem {
+      padding: var(--space-xs);
+      border-radius: var(--space-2xs);
+
+      &:hover {
+        background-color: var(--color-background-low);
+      }
     }
   </style>
 </header>
