@@ -27,6 +27,11 @@ interface Props {
 	gutter?: string;
 
 	/**
+	 * パディング値
+	 */
+	padding?: string;
+
+	/**
 	 * その他の属性を許可（型安全に）
 	 */
 	[key: string]: unknown;
@@ -34,7 +39,6 @@ interface Props {
 
 const {
 	class: className,
-	Element = "div",
 	max,
 	padding,
 	intrinsic,
@@ -52,13 +56,11 @@ const baseProps = {
 	]
 		.filter(Boolean)
 		.join(" "),
-	Element,
-	padding,
 	...rest,
 };
 ---
 
-<BaseElement {...baseProps}>
+<BaseElement Element="div" padding={padding} {...baseProps}>
   <slot />
 </BaseElement>
 

@@ -45,14 +45,13 @@ const baseProps = {
 		.filter(Boolean)
 		.join(" "),
 	Element,
-	gap,
 	"data-min": min || null,
 	"data-width": width || null,
 	...rest,
 };
 ---
 
-<BaseElement {...baseProps}>
+<BaseElement gap={gap} {...baseProps}>
   <slot />
 </BaseElement>
 

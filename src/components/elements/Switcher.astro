@@ -29,13 +29,12 @@ const baseProps = {
 	componentClass: "switcher",
 	class: className,
 	Element,
-	gap,
 	"data-threshold": threshold || null,
 	...rest,
 };
 ---
 
-<BaseElement {...baseProps}>
+<BaseElement gap={gap} {...baseProps}>
   <slot />
 </BaseElement>
 

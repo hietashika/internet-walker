@@ -3,58 +3,58 @@ import BaseElement from "./base/BaseElement.astro";
 
 // HTML input要素の有効なtype属性値の型定義
 type HTMLInputTypeAttribute =
-  | "button"
-  | "checkbox"
-  | "color"
-  | "date"
-  | "datetime-local"
-  | "email"
-  | "file"
-  | "hidden"
-  | "image"
-  | "month"
-  | "number"
-  | "password"
-  | "radio"
-  | "range"
-  | "reset"
-  | "search"
-  | "submit"
-  | "tel"
-  | "text"
-  | "time"
-  | "url"
-  | "week"
-  | (string & {});
+	| "button"
+	| "checkbox"
+	| "color"
+	| "date"
+	| "datetime-local"
+	| "email"
+	| "file"
+	| "hidden"
+	| "image"
+	| "month"
+	| "number"
+	| "password"
+	| "radio"
+	| "range"
+	| "reset"
+	| "search"
+	| "submit"
+	| "tel"
+	| "text"
+	| "time"
+	| "url"
+	| "week"
+	| (string & {});
 
 interface Props {
-  class?: string;
-  type?: "in" | "out";
-  inputType?: string;
-  inputId?: string;
-  inputPlaceholder?: string;
-  buttonType?: "submit" | "button" | "reset";
-  buttonAriaLabel?: string;
-  Element?: keyof HTMLElementTagNameMap;
-  [key: string]: unknown;
+	class?: string;
+	type?: "in" | "out";
+	inputType?: string;
+	inputId?: string;
+	inputPlaceholder?: string;
+	buttonType?: "submit" | "button" | "reset";
+	buttonAriaLabel?: string;
+	Element?: keyof HTMLElementTagNameMap;
+	[key: string]: unknown;
 }
 
 const {
-  inputType = "text",
-  inputId = "id",
-  inputPlaceholder = "placeholder",
-  buttonType = "submit",
-  buttonAriaLabel = "Submit",
-  type = "in",
-  Element = "form",
-  ...rest
+	inputType = "text",
+	inputId = "id",
+	inputPlaceholder = "placeholder",
+	buttonType = "submit",
+	buttonAriaLabel = "Submit",
+	type = "in",
+	Element = "form",
+	...rest
 } = Astro.props as Props;
 
 const baseProps = {
-  Element,
-  componentClass: "input",
-  class: [type === "in" ? "input--in" : "input--out"].filter(Boolean).join(" "),
-  ...rest,
+	Element,
+	componentClass: "input",
+	class: [type === "in" ? "input--in" : "input--out"].filter(Boolean).join(" "),
+	...rest,
 } as const;
 ---
 

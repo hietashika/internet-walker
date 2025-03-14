@@ -66,13 +66,11 @@ const baseProps = {
 	componentClass: "box",
 	class: [surfaceClass, className].filter(Boolean).join(" "),
 	Element,
-	padding,
-	margin,
 	...rest,
 };
 ---
 
-<BaseElement {...baseProps}>
+<BaseElement padding={padding} margin={margin} {...baseProps}>
   <slot />
 </BaseElement>
 

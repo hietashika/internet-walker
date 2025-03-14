@@ -31,8 +31,6 @@ const baseProps = {
 	componentClass: "cover",
 	class: className,
 	Element,
-	padding,
-	gap,
 	"data-height": height || null,
 	...rest,
 };
@@ -53,7 +51,7 @@ const hasDefaultSlot = hasSlotContent(null);
 const hasBottomSlot = hasSlotContent("bottom");
 ---
 
-<BaseElement {...baseProps}>
+<BaseElement padding={padding} gap={gap} {...baseProps}>
   {
     hasTopSlot && (
       <div data-slot="top">

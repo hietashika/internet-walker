@@ -11,6 +11,7 @@ interface Props {
 	class?: string;
 	Element?: keyof HTMLElementTagNameMap;
 	gap?: string;
+	padding?: string;
 	recursive?: boolean;
 	split?: boolean;
 	/**
@@ -58,7 +59,7 @@ const dataAttributes = hasMultipleGaps
 		};
 ---
 
-<BaseElement {...baseProps} {...dataAttributes}>
+<BaseElement padding={padding} {...baseProps} {...dataAttributes}>
   <slot />
 </BaseElement>
 
