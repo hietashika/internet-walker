@@ -7,33 +7,30 @@
 import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
-	class?: string;
-	gap?: string;
-	vertical?: boolean;
-	horizontal?: boolean;
-	rows?: string;
-	[key: string]: unknown;
+  class?: string;
+  vertical?: boolean;
+  horizontal?: boolean;
+  rows?: string;
+  [key: string]: unknown;
 }
 
 const {
-	class: className,
-	gap,
-	vertical,
-	horizontal,
-	rows,
-	...rest
+  class: className,
+  vertical,
+  horizontal,
+  rows,
+  ...rest
 } = Astro.props as Props;
 
 const baseProps = {
-	componentClass: "grid-stack",
-	class: [
-		className,
-		gap ? "grid-stack--gap" : "",
-		horizontal ? "grid-stack--horizontal" : "grid-stack--vertical",
-	]
-		.filter(Boolean)
-		.join(" "),
-	...rest,
+  componentClass: "grid-stack",
+  class: [
+    className,
+    horizontal ? "grid-stack--horizontal" : "grid-stack--vertical",
+  ]
+    .filter(Boolean)
+    .join(" "),
+  ...rest,
 };
 ---
 
@@ -46,7 +43,7 @@ const baseProps = {
 
   @include mix.element-base("grid-stack") {
     display: grid;
-    gap: var(--grid-stack-gap, var(--space-m));
+    gap: var(--grid-stack-gap, var(--space-xs));
 
     @include mix.spacing-classes("--grid-stack-gap", "gap");
 

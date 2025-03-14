@@ -9,42 +9,40 @@
 import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
-	href: string;
-	external?: boolean;
-	disabled?: boolean;
-	class?: string;
-	size?: string;
-	vertical?: boolean;
-	horizontal?: boolean;
-	padding?: string;
-	[key: string]: unknown;
+  href: string;
+  external?: boolean;
+  disabled?: boolean;
+  class?: string;
+  size?: string;
+  vertical?: boolean;
+  horizontal?: boolean;
+  padding?: string;
+  [key: string]: unknown;
 }
 
 const {
-	class: className,
-	href,
-	vertical,
-	horizontal,
-	Element = "a",
-	...rest
+  class: className,
+  href,
+  vertical,
+  horizontal,
+  ...rest
 } = Astro.props as Props;
 
 const layoutClass = vertical
-	? "link--vertical"
-	: horizontal
-		? "link--horizontal"
-		: "link--horizontal";
+  ? "link--vertical"
+  : horizontal
+    ? "link--horizontal"
+    : "link--horizontal";
 
 const baseProps = {
-	componentClass: "link",
-	Element,
-	class: [layoutClass, className].filter(Boolean).join(" "),
-	href,
-	...rest,
+  componentClass: "link",
+  class: [layoutClass, className].filter(Boolean).join(" "),
+  href,
+  ...rest,
 };
 ---
 
-<BaseElement {...baseProps}>
+<BaseElement Element="a" {...baseProps}>
   <slot />
 </BaseElement>
 
