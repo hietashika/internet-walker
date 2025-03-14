@@ -1,6 +1,53 @@
 ---
+import Link from "@elements/Link.astro";
+import GridStack from "./elements/GridStack.astro";
 ---
 
-<header>
-	<h1>ヘッダー</h1>
+<header class="header">
+  <div class="logo">
+    <svg width="44" height="44">
+      <circle cx="22" cy="22" r="20" stroke="black" stroke-width="4" fill="red"
+      ></circle>
+    </svg>
+  </div>
+  <div class="title">
+    <h1>Astro Template</h1>
+  </div>
+  <GridStack class="menu" horizontal>
+    <Link href="/" vertical gap="-3">
+      <svg width="24" height="24">
+        <circle
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="black"
+          stroke-width="4"
+          fill="red"></circle>
+      </svg>
+      Home</Link
+    >
+    <Link href="/about" vertical gap="-3">
+      <svg width="24" height="24">
+        <circle
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="black"
+          stroke-width="4"
+          fill="red"></circle>
+      </svg>
+      About</Link
+    >
+  </GridStack>
+
+  <style>
+    .header {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-auto-flow: column;
+      gap: var(--space-xs);
+      align-items: center;
+      padding: var(--space-m) var(--space-xl);
+    }
+  </style>
 </header>
