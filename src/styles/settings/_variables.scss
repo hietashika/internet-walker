@@ -75,6 +75,9 @@ $white-005: rgb(255 255 255 / 5%);
 
 // カスタムプロパティの設定
 :root {
+	// ColorScheme
+	color-scheme: light;
+
 	// Color
 	--color-primary: #{$primary-080};
 	--color-secondary: #{$secondary-060};
@@ -119,7 +122,7 @@ $white-005: rgb(255 255 255 / 5%);
 	// 小さいフォントサイズ（12px〜14px）
 	--font-size-xs: calc(var(--font-size-base) * 0.75); // 12px
 	--font-size-s: calc(var(--font-size-base) * 0.875); // 14px
-	
+
 	// 基本〜中サイズフォント（16px〜20px）
 	--font-size-m: var(--font-size-base); // 16px
 	--font-size-l: calc(var(--font-size-base) * 1.125); // 18px
@@ -169,5 +172,7 @@ $white-005: rgb(255 255 255 / 5%);
 	--space-9xl: calc(var(--space-base) * 32); // 512px
 	--space-10xl: calc(var(--space-base) * 40); // 640px
 	--space-11xl: calc(var(--space-base) * 48); // 768px
+
+
 }
 

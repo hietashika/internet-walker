@@ -1,4 +1,5 @@
 @use "sass:map";
+@use "sass:string";
 
 // スペーシングシステム
 @mixin space-variables {
@@ -216,6 +217,7 @@
   font-size: clamp(#{$min}, calc(#{$min} + #{$vw-factor}), #{$max});
 }
 
+
 /**
  * フォントサイズを設定するミックスイン
  * パラメータが渡された場合はその値を使用し、
@@ -228,27 +230,27 @@
   // フォントサイズの設定をマップで管理
   $font-size-map: (
     // 12px-14px  
-    "14": (min: var(--font-size-xs), factor: 0.5vw, max: var(--font-size-s)),
+    "14": (min: var(--font-size-xs), factor: 5vw, max: var(--font-size-s)),
     // 14px-16px
-    "16": (min: var(--font-size-s), factor: 0.5vw, max: var(--font-size-m)),
+    "16": (min: var(--font-size-s), factor: 5vw, max: var(--font-size-m)),
     // 16px-18px
-    "18": (min: var(--font-size-m), factor: 0.5vw, max: var(--font-size-l)),
+    "18": (min: var(--font-size-m), factor: 5vw, max: var(--font-size-l)),
     // 18px-20px
-    "20":  (min: var(--font-size-l), factor: 0.5vw, max: var(--font-size-xl)),
+    "20":  (min: var(--font-size-l), factor: 5vw, max: var(--font-size-xl)),
     // 20px-24px
-    "24":  (min: var(--font-size-xl), factor: 0.5vw, max: var(--font-size-2xl)),
+    "24":  (min: var(--font-size-xl), factor: 5vw, max: var(--font-size-2xl)),
     // 24px-30px
-    "30":  (min: var(--font-size-2xl), factor: 0.5vw, max: var(--font-size-3xl)),
+    "30":  (min: var(--font-size-2xl), factor: 5vw, max: var(--font-size-3xl)),
     // 30px-36px
-    "36":  (min: var(--font-size-3xl), factor: 0.75vw, max: var(--font-size-4xl)),
+    "36":  (min: var(--font-size-3xl), factor: 5vw, max: var(--font-size-4xl)),
     // 36px-48px
-    "48":  (min: var(--font-size-4xl), factor: 0.75vw, max: var(--font-size-5xl)),
+    "48":  (min: var(--font-size-4xl), factor: 5vw, max: var(--font-size-5xl)),
     // 48px-60px
-    "60":  (min: var(--font-size-5xl), factor: 0.75vw, max: var(--font-size-6xl)),
+    "60":  (min: var(--font-size-5xl), factor: 5vw, max: var(--font-size-6xl)),
     // 60px-72px
-    "72":  (min: var(--font-size-6xl), factor: 1vw, max: var(--font-size-7xl)),
+    "72":  (min: var(--font-size-6xl), factor: 5vw, max: var(--font-size-7xl)),
     // 72px-86.4px
-    "86":  (min: var(--font-size-7xl), factor: 1vw, max: calc(var(--font-size-7xl) * 1.2))
+    "86":  (min: var(--font-size-7xl), factor: 5vw, max: calc(var(--font-size-7xl) * 1.2))
   );
   
   // サイズが指定されている場合、そのサイズを直接適用

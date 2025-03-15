@@ -56,9 +56,6 @@ const baseProps = {
   @include mix.element-base("link") {
     display: grid;
 
-    // フォントサイズ制御
-    @include mix.font-size;
-
     &--vertical {
       gap: var(--link-vertical-gap, var(--space-xs));
       justify-items: center;

@@ -1,37 +1,32 @@
 ---
 interface Props {
-	href: string;
-	variant?: "primary" | "secondary" | "tertiary";
-	size?: "small" | "medium" | "large";
-	type?: "vertical" | "horizontal";
-	withIcon?: boolean | undefined;
-	fontSize?: string;
-	gap?: string;
+  href: string;
+  variant?: "primary" | "secondary" | "tertiary";
+  size?: "small" | "medium" | "large";
+  type?: "vertical" | "horizontal";
+  withIcon?: boolean | undefined;
+  gap?: string;
 }
 
 import Link from "@elements/Link.astro";
-import { getFontSizeClass } from "../utils/spacing";
 
 const {
-	href,
-	variant = "primary",
-	size = "medium",
-	type = "horizontal",
-	withIcon,
-	gap,
-	...rest
+  href,
+  variant = "primary",
+  size = "medium",
+  type = "horizontal",
+  withIcon,
+  gap,
+  ...rest
 } = Astro.props as Props;
-
-// フォントサイズクラスの生成
-const fontSizeClass = getFontSizeClass(size);
 ---
 
 <button class:list={["button", `button--${variant}`, `button--${size}`]}>
+  ああああ
   <Link
     href={href}
     type={type}
     withIcon={withIcon !== undefined ? true : undefined}
-    fontSize={fontSizeClass}
     gap={gap}
     {...rest}
   >
@@ -86,20 +81,14 @@ const fontSizeClass = getFontSizeClass(size);
     // Button Size Variants
     &--small {
       padding: var(--space-2xs) var(--space-xs);
-
-      @include mix.font-size("14");
     }
 
     &--medium {
       padding: var(--space-xs) var(--space-s);
-
-      @include mix.font-size("16");
     }
 
     &--large {
       padding: var(--space-s) var(--space-m);
-
-      @include mix.font-size("24");
     }
   }
 </style>

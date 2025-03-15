@@ -11,5 +11,21 @@ import Layout from "@layouts/Layout.astro";
 ---
 
 <Layout pageTitle="Test">
-  <Button href="/" variant="tertiary" size="small"> ボタン </Button>
+  <Center>
+    <Stack gap="4">
+      <h1>見出し1 - レスポンシブフォントテスト</h1>
+      <h2>見出し2 - レスポンシブフォントテスト</h2>
+      <h3>見出し3 - レスポンシブフォントテスト</h3>
+
+      <p>
+        これは段落テキストです。レスポンシブフォントが正しく適用されているかテストします。
+      </p>
+
+      <Button href="/" variant="primary" size="small">小さいボタン</Button>
+      <Button href="/" variant="secondary" size="medium"
+        >中くらいのボタン</Button
+      >
+      <Button href="/" variant="tertiary" size="large">大きいボタン</Button>
+    </Stack>
+  </Center>
 </Layout>
