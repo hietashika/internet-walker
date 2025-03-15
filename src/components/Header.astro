@@ -1,5 +1,5 @@
 ---
-import Link from "@elements/Link.astro";
+import Button from "@components/Button.astro";
 import GridStack from "./elements/GridStack.astro";
 ---
 
@@ -14,7 +14,7 @@ import GridStack from "./elements/GridStack.astro";
     <h1>Astro Template</h1>
   </div>
   <GridStack horizontal>
-    <Link href="/" type="vertical" gap="-2" class="menuItem">
+    <Button href="/" variant="tertiary" size="small" type="vertical">
       <svg width="24" height="24">
         <circle
           cx="12"
@@ -24,9 +24,9 @@ import GridStack from "./elements/GridStack.astro";
           stroke-width="4"
           fill="red"></circle>
       </svg>
-      Home</Link
-    >
-    <Link href="/about" type="vertical" gap="-2" class="menuItem">
+      Home
+    </Button>
+    <Button href="/about" variant="tertiary" size="small" type="vertical">
       <svg width="24" height="24">
         <circle
           cx="12"
@@ -36,7 +36,7 @@ import GridStack from "./elements/GridStack.astro";
           stroke-width="4"
           fill="red"></circle>
       </svg>
-      About</Link
+      About</Button
     >
   </GridStack>
 

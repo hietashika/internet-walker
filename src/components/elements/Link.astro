@@ -60,7 +60,7 @@ const baseProps = {
     @include mix.font-size;
 
     &--vertical {
-      gap: var(--link-vertical-gap, var(--space-s));
+      gap: var(--link-vertical-gap, var(--space-xs));
       justify-items: center;
 
       @include mix.spacing-classes("--link-vertical-gap", "gap");
@@ -73,7 +73,7 @@ const baseProps = {
 
     &--with-icon {
       grid-template-columns: auto 1fr;
-      gap: var(--link-horizontal-gap, var(--space-s));
+      gap: var(--link-horizontal-gap, var(--space-xs));
 
       @include mix.spacing-classes("--link-horizontal-gap", "gap");
     }
