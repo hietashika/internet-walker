@@ -9,36 +9,40 @@
 import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
-	href: string;
-	external?: boolean;
-	disabled?: boolean;
-	class?: string;
-	size?: string;
-	vertical?: boolean;
-	horizontal?: boolean;
-	padding?: string;
-	[key: string]: unknown;
+  href: string;
+  external?: boolean;
+  disabled?: boolean;
+  class?: string;
+  fontSize?: string;
+  size?: string;
+  type?: "vertical" | "horizontal";
+  withIcon?: boolean | undefined;
+  padding?: string;
+  [key: string]: unknown;
 }
 
 const {
-	class: className,
-	href,
-	vertical,
-	horizontal,
-	...rest
+  class: className,
+  href,
+  type = "horizontal",
+  withIcon,
+  fontSize,
+  ...rest
 } = Astro.props as Props;
 
-const layoutClass = vertical
-	? "link--vertical"
-	: horizontal
-		? "link--horizontal"
-		: "link--horizontal";
+const layoutClass = `link--${type}`;
+const iconClass =
+  type === "horizontal"
+    ? withIcon !== undefined
+      ? "link--with-icon"
+      : "link--without-icon"
+    : "";
 
 const baseProps = {
-	componentClass: "link",
-	class: [layoutClass, className].filter(Boolean).join(" "),
-	href,
-	...rest,
+  componentClass: "link",
+  class: [layoutClass, iconClass, className].filter(Boolean).join(" "),
+  href,
+  ...rest,
 };
 ---
 
@@ -52,8 +56,8 @@ const baseProps = {
   @include mix.element-base("link") {
     display: grid;
 
-    // 16px 〜 18px
-    @include mix.responsive-font-size(var(--font-size-m), var(--font-size-l));
+    // フォントサイズ制御
+    @include mix.font-size;
 
     &--vertical {
       gap: var(--link-vertical-gap, var(--space-s));
@@ -63,12 +67,19 @@ const baseProps = {
     }
 
     &--horizontal {
-      grid-template-columns: auto 1fr;
       grid-auto-flow: column;
-      gap: var(--link-horizontal-gap, var(--space-s));
       align-items: center;
+    }
+
+    &--with-icon {
+      grid-template-columns: auto 1fr;
+      gap: var(--link-horizontal-gap, var(--space-s));
 
       @include mix.spacing-classes("--link-horizontal-gap", "gap");
+    }
+
+    &--without-icon {
+      grid-template-columns: 1fr;
     }
   }
 </style>
