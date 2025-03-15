@@ -85,3 +85,14 @@ export function getGapClasses(
 	// 不正な形式の場合
 	return useDimensionalProps ? {} : [];
 }
+
+/**
+ * フォントサイズクラスを取得する
+ * @param fontSize フォントサイズの値
+ * @returns フォントサイズのクラス名
+ */
+export function getFontSizeClass(fontSize: string | undefined): string {
+	console.log(`getFontSizeClass called with: ${fontSize}`);
+	if (!fontSize) return '';
+	return `font-size-${fontSize}`;
+}

@@ -1,3 +1,5 @@
+@use "sass:map";
+
 // スペーシングシステム
 @mixin space-variables {
   // 非常に小さいスペース
@@ -212,4 +214,64 @@
  */
 @mixin responsive-font-size($min, $max, $vw-factor: 1vw) {
   font-size: clamp(#{$min}, calc(#{$min} + #{$vw-factor}), #{$max});
+}
+
+/**
+ * フォントサイズを設定するミックスイン
+ * パラメータが渡された場合はその値を使用し、
+ * 渡されない場合はHTML属性を使用してフォントサイズを制御します
+ * 各サイズは適切なclamp()を使ってレスポンシブに変化します
+ * 
+ * @param {string} $size - オプションのフォントサイズ指定値（例："-3", "2"）
+ */
+@mixin font-size($size: null) {
+  // フォントサイズの設定をマップで管理
+  $font-size-map: (
+    // 12px-14px  
+    "14": (min: var(--font-size-xs), factor: 0.5vw, max: var(--font-size-s)),
+    // 14px-16px
+    "16": (min: var(--font-size-s), factor: 0.5vw, max: var(--font-size-m)),
+    // 16px-18px
+    "18": (min: var(--font-size-m), factor: 0.5vw, max: var(--font-size-l)),
+    // 18px-20px
+    "20":  (min: var(--font-size-l), factor: 0.5vw, max: var(--font-size-xl)),
+    // 20px-24px
+    "24":  (min: var(--font-size-xl), factor: 0.5vw, max: var(--font-size-2xl)),
+    // 24px-30px
+    "30":  (min: var(--font-size-2xl), factor: 0.5vw, max: var(--font-size-3xl)),
+    // 30px-36px
+    "36":  (min: var(--font-size-3xl), factor: 0.75vw, max: var(--font-size-4xl)),
+    // 36px-48px
+    "48":  (min: var(--font-size-4xl), factor: 0.75vw, max: var(--font-size-5xl)),
+    // 48px-60px
+    "60":  (min: var(--font-size-5xl), factor: 0.75vw, max: var(--font-size-6xl)),
+    // 60px-72px
+    "72":  (min: var(--font-size-6xl), factor: 1vw, max: var(--font-size-7xl)),
+    // 72px-86.4px
+    "86":  (min: var(--font-size-7xl), factor: 1vw, max: calc(var(--font-size-7xl) * 1.2))
+  );
+  
+  // サイズが指定されている場合、そのサイズを直接適用
+  @if $size {
+    @if map.has-key($font-size-map, $size) {
+      $size-config: map.get($font-size-map, $size);
+
+      @include responsive-font-size(
+        map.get($size-config, min),
+        map.get($size-config, max),
+        map.get($size-config, factor)
+      );
+    }
+  } @else {
+    // クラス名を使ったフォントサイズ制御
+    @each $size-key, $size-config in $font-size-map {
+      &.font-size-#{$size-key} {
+        @include responsive-font-size(
+          map.get($size-config, min),
+          map.get($size-config, max),
+          map.get($size-config, factor)
+        );
+      }
+    }
+  }
 }
