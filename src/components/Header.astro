@@ -39,24 +39,15 @@ import GridStack from "./elements/GridStack.astro";
       About</Button
     >
   </GridStack>
-
-  <style lang="scss">
-    .header {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      grid-auto-flow: column;
-      gap: var(--space-xs);
-      align-items: center;
-      padding: var(--space-m) var(--space-xl);
-    }
-
-    .menuItem {
-      padding: var(--space-xs);
-      border-radius: var(--space-2xs);
-
-      &:hover {
-        background-color: var(--color-background-low);
-      }
-    }
-  </style>
 </header>
+
+<style lang="scss">
+  .header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-auto-flow: column;
+    gap: var(--space-xs);
+    align-items: center;
+    padding: var(--space-m) var(--space-xl);
+  }
+</style>
