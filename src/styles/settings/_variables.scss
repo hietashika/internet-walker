@@ -11,19 +11,108 @@ $white-middle: rgb(255 255 255 / 91%);
 $white-low: rgb(255 255 255 / 71%);
 $white-disabled: rgb(255 255 255 / 26%);
 
+// Primary
+$primary-100: rgb(0 0 249 / 100%);
+$primary-090: rgb(0 0 251 / 100%);
+$primary-080: rgb(0 0 255 / 100%);
+$primary-070: rgb(59 14 255 / 100%);
+$primary-060: rgb(80 19 255 / 100%);
+$primary-050: rgb(119 69 255 / 100%);
+$primary-040: rgb(150 107 255 / 100%);
+$primary-030: rgb(183 152 255 / 100%);
+$primary-020: rgb(213 194 255 / 100%);
+$primary-010: rgb(240 230 255 / 100%);
+
+// Secondary
+$secondary-100: rgb(255 138 0 / 100%);
+$secondary-090: rgb(255 183 0 / 100%);
+$secondary-080: rgb(255 209 0 / 100%);
+$secondary-070: rgb(255 235 0 / 100%);
+$secondary-060: rgb(255 255 0 / 100%);
+$secondary-050: rgb(240 242 52 / 100%);
+$secondary-040: rgb(245 246 98 / 100%);
+$secondary-030: rgb(249 250 147 / 100%);
+$secondary-020: rgb(252 253 192 / 100%);
+$secondary-010: rgb(255 255 230 / 100%);
+
+// Gray
+$gray-100: rgb(33 33 33 / 100%);
+$gray-090: rgb(56 56 56 / 100%);
+$gray-080: rgb(77 77 77 / 100%);
+$gray-070: rgb(100 100 100 / 100%);
+$gray-060: rgb(117 117 117 / 100%);
+$gray-050: rgb(144 144 144 / 100%);
+$gray-040: rgb(166 166 166 / 100%);
+$gray-030: rgb(189 189 189 / 100%);
+$gray-020: rgb(211 211 211 / 100%);
+$gray-010: rgb(233 233 233 / 100%);
+$gray-005: rgb(233 233 233 / 100%);
+
+// Gray Alpha
+$gray-alpha-090: rgb(33 33 33 / 90%);
+$gray-alpha-080: rgb(33 33 33 / 80%);
+$gray-alpha-070: rgb(33 33 33 / 70%);
+$gray-alpha-060: rgb(33 33 33 / 62%);
+$gray-alpha-050: rgb(33 33 33 / 50%);
+$gray-alpha-040: rgb(33 33 33 / 40%);
+$gray-alpha-030: rgb(33 33 33 / 30%);
+$gray-alpha-020: rgb(33 33 33 / 20%);
+$gray-alpha-010: rgb(33 33 33 / 10%);
+$gray-alpha-005: rgb(33 33 33 / 5%);
+
+// White
+$white-100: rgb(255 255 255 / 100%);
+$white-090: rgb(255 255 255 / 90%);
+$white-080: rgb(255 255 255 / 80%);
+$white-070: rgb(255 255 255 / 70%);
+$white-060: rgb(255 255 255 / 60%);
+$white-050: rgb(255 255 255 / 50%);
+$white-040: rgb(255 255 255 / 40%);
+$white-030: rgb(255 255 255 / 30%);
+$white-020: rgb(255 255 255 / 20%);
+$white-010: rgb(255 255 255 / 10%);
+$white-005: rgb(255 255 255 / 5%);
+
 // カスタムプロパティの設定
 :root {
 	// Color
-	--color-primary: #{$primary-100};
-	--color-text-high: #{$gray-high};
-	--color-text-middle: #{$gray-middle};
-	--color-text-low: #{$gray-low};
-	--color-text-disabled: #{$gray-disabled};
-	--color-background-high: #{$white-high};
-	--color-background-middle: #{$alto-010};
-	--color-background-low: #{$alto-020};
-	--color-border: #{$alto-010};
+	--color-primary: #{$primary-080};
+	--color-secondary: #{$secondary-060};
 
+	// Text Color
+	--color-text-high: #{$gray-100};  
+	--color-text-middle: #{$gray-alpha-070};
+	--color-text-low: #{$gray-alpha-060};
+	--color-text-disabled: #{$gray-alpha-030};
+	--color-text-primary: #{$white-100};
+
+	// Background Color
+	--color-background-base: #{$gray-005};
+	--color-background-primary: #{$white-100};
+	--color-background-secondary: #{$gray-alpha-005};
+	--color-background-tertiary: #{$gray-alpha-010};
+	--color-background-quaternary: #{$gray-alpha-020};
+	--color-background-accent: #{$primary-080};
+
+	// Border Color
+	--color-border-high: #{$gray-alpha-060};
+	--color-border-middle: #{$gray-alpha-030};
+	--color-border-low: #{$gray-alpha-010};
+	--color-border-strong: #{$gray-100};
+	--color-border-primary: #{$primary-080};
+	--color-border-white-high: #{$white-100};
+	--color-border-white-low: #{$white-020};
+
+
+	// Hover Color & Active Color
+	--color-hover-contained: #{$primary-100};
+	--color-hover-outlined: #{$primary-010};
+	--color-hover-neutral: #{$gray-alpha-005};
+	--color-active-contained: #{$primary-100};
+	--color-active-outlined: #{$primary-010};
+	--color-active-neutral: #{$gray-alpha-005};
+
+	
 	// フォントサイズ
 	--font-size-base: 1rem; // 16px - 基準サイズ
 	
