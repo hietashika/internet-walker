@@ -7,34 +7,9 @@ import Sidebar from "@elements/Sidebar.astro";
 import Stack from "@elements/Stack.astro";
 import Switcher from "@elements/Switcher.astro";
 import Layout from "@layouts/Layout.astro";
+import Button from "@components/Button.astro";
 ---
 
 <Layout pageTitle="Test">
-  <Center>
-    <Cluster gap="3 6" align="center" justify="between" content="start">
-      <Box padding="1" surface="tertiary">
-        <Stack gap="2">
-          <h1>ヘッドライン</h1>
-          <p>テキスト</p>
-        </Stack>
-      </Box>
-      <Box padding="1" surface="tertiary">
-        <Stack gap="2">
-          <h1>ヘッドライン</h1>
-          <p>テキスト</p>
-        </Stack>
-      </Box>
-    </Cluster>
-    <Switcher threshold="40rem">
-      <Box padding="1" surface="tertiary">
-        <h1>ヘッドライン</h1>
-      </Box>
-      <Box padding="1" surface="tertiary">
-        <h1>ヘッドライン</h1>
-      </Box>
-      <Box padding="1" surface="tertiary">
-        <h1>ヘッドライン</h1>
-      </Box>
-    </Switcher>
-  </Center>
+  <Button href="/" variant="primary" size="small"> ボタン </Button>
 </Layout>
