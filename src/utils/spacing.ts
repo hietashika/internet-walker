@@ -93,6 +93,6 @@ export function getGapClasses(
  */
 export function getFontSizeClass(fontSize: string | undefined): string {
 	console.log(`getFontSizeClass called with: ${fontSize}`);
-	if (!fontSize) return '';
+	if (!fontSize) return "";
 	return `font-size-${fontSize}`;
 }

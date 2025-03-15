@@ -1,25 +1,25 @@
 ---
 interface Props {
-  href: string;
-  variant?: "primary" | "secondary" | "tertiary";
-  size?: "small" | "medium" | "large";
-  type?: "vertical" | "horizontal";
-  withIcon?: boolean | undefined;
-  fontSize?: string;
-  gap?: string;
+	href: string;
+	variant?: "primary" | "secondary" | "tertiary";
+	size?: "small" | "medium" | "large";
+	type?: "vertical" | "horizontal";
+	withIcon?: boolean | undefined;
+	fontSize?: string;
+	gap?: string;
 }
 
 import Link from "@elements/Link.astro";
 import { getFontSizeClass } from "../utils/spacing";
 
 const {
-  href,
-  variant = "primary",
-  size = "medium",
-  type = "horizontal",
-  withIcon,
-  gap,
-  ...rest
+	href,
+	variant = "primary",
+	size = "medium",
+	type = "horizontal",
+	withIcon,
+	gap,
+	...rest
 } = Astro.props as Props;
 
 // フォントサイズクラスの生成

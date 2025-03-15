@@ -1,4 +1,19 @@
 ---
+/**
+ * Inputコンポーネント
+ *
+ * 入力フォームを作成するためのコンポーネント
+ * 縦横のレイアウトを切り替えることができる
+ *
+ * プロパティ
+ * - type: "in" | "out" 縦横のレイアウトを切り替える
+ * - inputType: 入力タイプ
+ * - inputId: 入力ID
+ * - inputPlaceholder: 入力Placeholder
+ * - buttonType: ボタンタイプ
+ * - buttonAriaLabel: ボタンのaria-label
+ */
+
 import BaseElement from "./base/BaseElement.astro";
 
 // HTML input要素の有効なtype属性値の型定義
@@ -96,6 +111,7 @@ const baseProps = {
     align-items: center;
 
     svg {
+      display: block;
       width: var(--input-icon-size, var(--space-l));
       height: var(--input-icon-size, var(--space-l));
     }
