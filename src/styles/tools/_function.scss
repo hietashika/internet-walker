@@ -1,0 +1,14 @@
+// minとmaxの間で、最適なフォントサイズを返す
+@function clamp-size($min, $max, $min-vw: 320, $max-vw: 1440) {
+  $slope: calc(($max - $min) / ($max-vw - $min-vw));
+  $intercept: calc($min - $slope * $min-vw);
+  $preffered: calc($slope * 100vw + $intercept / 16 * 1rem);
+  $clamp: clamp(($min / 16 * 1rem), $preffered, ($max / 16 * 1rem));
+
+  @return $clamp;
+}
+
+// 数値をremに変換する
+@function rem($size) {
+  @return calc($size / 16 * 1rem);
+}

@@ -11,4 +11,15 @@ export default defineConfig({
 	devToolbar: {
 		enabled: false,
 	},
+	vite: {
+		css: {
+			preprocessorOptions: {
+				scss: {
+					additionalData: `
+					@use "@styles/tools/_mixin.scss" as *;
+					@use "@styles/tools/_function.scss" as *;`,
+				},
+			},
+		},
+	},
 });

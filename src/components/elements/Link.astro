@@ -9,40 +9,40 @@
 import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
-	href: string;
-	external?: boolean;
-	disabled?: boolean;
-	class?: string;
-	fontSize?: string;
-	size?: string;
-	type?: "vertical" | "horizontal";
-	withIcon?: boolean | undefined;
-	padding?: string;
-	[key: string]: unknown;
+  href: string;
+  external?: boolean;
+  disabled?: boolean;
+  class?: string;
+  fontSize?: string;
+  size?: string;
+  type?: "vertical" | "horizontal";
+  withIcon?: boolean | undefined;
+  padding?: string;
+  [key: string]: unknown;
 }
 
 const {
-	class: className,
-	href,
-	type = "horizontal",
-	withIcon,
-	fontSize,
-	...rest
+  class: className,
+  href,
+  type = "horizontal",
+  withIcon,
+  fontSize,
+  ...rest
 } = Astro.props as Props;
 
 const layoutClass = `link--${type}`;
 const iconClass =
-	type === "horizontal"
-		? withIcon !== undefined
-			? "link--with-icon"
-			: "link--without-icon"
-		: "";
+  type === "horizontal"
+    ? withIcon !== undefined
+      ? "link--with-icon"
+      : "link--without-icon"
+    : "";
 
 const baseProps = {
-	componentClass: "link",
-	class: [layoutClass, iconClass, className].filter(Boolean).join(" "),
-	href,
-	...rest,
+  componentClass: "link",
+  class: [layoutClass, iconClass, className].filter(Boolean).join(" "),
+  href,
+  ...rest,
 };
 ---
 
@@ -51,16 +51,14 @@ const baseProps = {
 </BaseElement>
 
 <style lang="scss">
-  @use "../../styles/tools/mixin" as mix;
-
-  @include mix.element-base("link") {
+  @include element-base("link") {
     display: grid;
 
     &--vertical {
       gap: var(--link-vertical-gap, var(--space-xs));
       justify-items: center;
 
-      @include mix.spacing-classes("--link-vertical-gap", "gap");
+      @include spacing-classes("--link-vertical-gap", "gap");
     }
 
     &--horizontal {
@@ -72,7 +70,7 @@ const baseProps = {
       grid-template-columns: auto 1fr;
       gap: var(--link-horizontal-gap, var(--space-xs));
 
-      @include mix.spacing-classes("--link-horizontal-gap", "gap");
+      @include spacing-classes("--link-horizontal-gap", "gap");
     }
 
     &--without-icon {

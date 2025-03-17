@@ -120,26 +120,29 @@ $white-005: rgb(255 255 255 / 5%);
 	--font-size-base: 1rem; // 16px - 基準サイズ
 	
 	// 小さいフォントサイズ（12px〜14px）
-	--font-size-xs: calc(var(--font-size-base) * 0.75); // 12px
-	--font-size-s: calc(var(--font-size-base) * 0.875); // 14px
+	--font-size-xs: 12; // 12px
+	--font-size-s: 14; // 14px
 
 	// 基本〜中サイズフォント（16px〜20px）
-	--font-size-m: var(--font-size-base); // 16px
-	--font-size-l: calc(var(--font-size-base) * 1.125); // 18px
-	--font-size-xl: calc(var(--font-size-base) * 1.25); // 20px
+	--font-size-m: 16; // 16px
+	--font-size-l: 18; // 18px
+	--font-size-xl: 20; // 20px
 	
 	// 大きいフォントサイズ（24px〜36px）
-	--font-size-2xl: calc(var(--font-size-base) * 1.5); // 24px
-	--font-size-3xl: calc(var(--font-size-base) * 1.875); // 30px
-	--font-size-4xl: calc(var(--font-size-base) * 2.25); // 36px
+	--font-size-2xl: 24; // 24px
+	--font-size-3xl: 30; // 30px
+	--font-size-4xl: 36; // 36px
 	
 	// 見出し・タイトル用フォントサイズ（48px〜72px）
-	--font-size-5xl: calc(var(--font-size-base) * 3); // 48px
-	--font-size-6xl: calc(var(--font-size-base) * 3.75); // 60px
-	--font-size-7xl: calc(var(--font-size-base) * 4.5); // 72px
+	--font-size-5xl: 48; // 48px
+	--font-size-6xl: 60; // 60px
+	--font-size-7xl: 72; // 72px
 
 	// 文字の最大幅
 	--max-inline-size: 48rem;
+
+	// コンテナーの最大幅
+	--max-width: 90rem;
 
 	// 行間の調整
 	--leading-trim: calc((1em - 1lh) / 2);

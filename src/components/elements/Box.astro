@@ -8,65 +8,65 @@
 import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
-	padding?: string;
-	margin?: string;
-	class?: string;
-	Element?: keyof HTMLElementTagNameMap;
-	/**
-	 * 背景色の種類を指定
-	 * - primary: 高コントラスト背景色
-	 * - middle: 中程度コントラスト背景色
-	 * - low: 低コントラスト背景色
-	 */
-	surface?: "primary" | "secondary" | "tertiary";
+  padding?: string;
+  margin?: string;
+  class?: string;
+  Element?: keyof HTMLElementTagNameMap;
+  /**
+   * 背景色の種類を指定
+   * - primary: 高コントラスト背景色
+   * - middle: 中程度コントラスト背景色
+   * - low: 低コントラスト背景色
+   */
+  surface?: "primary" | "secondary" | "tertiary";
 
-	/**
-	 * ボーダーを含めるかどうか
-	 */
-	border?: boolean;
+  /**
+   * ボーダーを含めるかどうか
+   */
+  border?: boolean;
 
-	/**
-	 * 投影（シャドウ）のサイズ
-	 * @default "0"
-	 */
-	shadow?: "0" | "1" | "2" | "3";
+  /**
+   * 投影（シャドウ）のサイズ
+   * @default "0"
+   */
+  shadow?: "0" | "1" | "2" | "3";
 
-	/**
-	 * ボーダーの色
-	 */
-	borderColor?: string;
+  /**
+   * ボーダーの色
+   */
+  borderColor?: string;
 
-	/**
-	 * 背景色
-	 */
-	backgroundColor?: string;
+  /**
+   * 背景色
+   */
+  backgroundColor?: string;
 
-	/**
-	 * その他の属性を許可（型安全に）
-	 */
-	[key: string]: unknown;
+  /**
+   * その他の属性を許可（型安全に）
+   */
+  [key: string]: unknown;
 }
 
 const {
-	padding,
-	margin,
-	class: className,
-	Element = "div",
-	surface,
-	...rest
+  padding,
+  margin,
+  class: className,
+  Element = "div",
+  surface,
+  ...rest
 } = Astro.props as Props;
 
 // サーフェスクラスを生成（存在する場合のみ）
 const surfaceClass = surface
-	? `box--surface${surface.charAt(0).toUpperCase() + surface.slice(1)}`
-	: "";
+  ? `box--surface${surface.charAt(0).toUpperCase() + surface.slice(1)}`
+  : "";
 
 // 基本コンポーネントに渡すプロパティを準備
 const baseProps = {
-	componentClass: "box",
-	class: [surfaceClass, className].filter(Boolean).join(" "),
-	Element,
-	...rest,
+  componentClass: "box",
+  class: [surfaceClass, className].filter(Boolean).join(" "),
+  Element,
+  ...rest,
 };
 ---
 
@@ -75,19 +75,17 @@ const baseProps = {
 </BaseElement>
 
 <style lang="scss">
-  @use "../../styles/tools/mixin" as mix;
-
   /**
    * Boxコンポーネントのスタイル
    */
-  @include mix.element-base("box") {
+  @include element-base("box") {
     background-color: transparent;
     outline: 0.125rem solid transparent;
     outline-offset: -0.125rem;
 
     /* スペーシングクラスの適用 */
-    @include mix.spacing-classes("--box-padding", "padding");
-    @include mix.spacing-classes("--box-margin", "margin");
+    @include spacing-classes("--box-padding", "padding");
+    @include spacing-classes("--box-margin", "margin");
 
     /**
      * サーフェスバリエーション

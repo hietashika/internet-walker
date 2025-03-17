@@ -8,55 +8,55 @@
 import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
-	/**
-	 * 中央寄せの方法
-	 * @default "intrinsic"
-	 */
-	type?: "text" | "intrinsic";
+  /**
+   * 中央寄せの方法
+   * @default "intrinsic"
+   */
+  type?: "text" | "intrinsic";
 
-	/**
-	 * 最大幅
-	 * @default "container"
-	 */
-	maxWidth?: string;
+  /**
+   * 最大幅
+   * @default "container"
+   */
+  maxWidth?: string;
 
-	/**
-	 * 最小の左右パディング
-	 * @default "1"
-	 */
-	gutter?: string;
+  /**
+   * 最小の左右パディング
+   * @default "1"
+   */
+  gutter?: string;
 
-	/**
-	 * パディング値
-	 */
-	padding?: string;
+  /**
+   * パディング値
+   */
+  padding?: string;
 
-	/**
-	 * その他の属性を許可（型安全に）
-	 */
-	[key: string]: unknown;
+  /**
+   * その他の属性を許可（型安全に）
+   */
+  [key: string]: unknown;
 }
 
 const {
-	class: className,
-	max,
-	padding,
-	intrinsic,
-	andText,
-	...rest
+  class: className,
+  max,
+  padding,
+  intrinsic,
+  andText,
+  ...rest
 } = Astro.props as Props;
 
 // 基本コンポーネントに渡すプロパティを準備
 const baseProps = {
-	componentClass: "center",
-	class: [
-		intrinsic ? "intrinsic" : "",
-		andText ? "center__text" : "",
-		className,
-	]
-		.filter(Boolean)
-		.join(" "),
-	...rest,
+  componentClass: "center",
+  class: [
+    intrinsic ? "intrinsic" : "",
+    andText ? "center__text" : "",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" "),
+  ...rest,
 };
 ---
 
@@ -65,16 +65,14 @@ const baseProps = {
 </BaseElement>
 
 <style lang="scss">
-  @use "../../styles/tools/mixin" as mix;
-
-  @include mix.element-base("center") {
+  @include element-base("center") {
     box-sizing: content-box;
-    max-inline-size: var(--max-inline-size);
+    max-inline-size: var(--max-width);
     margin-inline: auto;
     padding-inline: var(--center-padding, var(--space-m));
 
     // スペーシングクラスを生成
-    @include mix.spacing-classes("--center-padding", "padding");
+    @include spacing-classes("--center-padding", "padding");
 
     // バリアント
     &.intrinsic {

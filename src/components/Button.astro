@@ -22,7 +22,6 @@ const {
 ---
 
 <button class:list={["button", `button--${variant}`, `button--${size}`]}>
-  ああああ
   <Link
     href={href}
     type={type}
@@ -35,14 +34,14 @@ const {
 </button>
 
 <style lang="scss">
-  @use "../styles/tools/mixin" as mix;
-
   a {
     color: inherit;
     text-decoration: none;
   }
 
   .button {
+    max-inline-size: var(--max-inline-size);
+
     // Button Base
     border-radius: var(--space-2xs);
     cursor: pointer;
@@ -81,14 +80,17 @@ const {
     // Button Size Variants
     &--small {
       padding: var(--space-2xs) var(--space-xs);
+      font-size: clamp-size(var(--font-size-xs), var(--font-size-s));
     }
 
     &--medium {
       padding: var(--space-xs) var(--space-s);
+      font-size: clamp-size(var(--font-size-m), var(--font-size-l));
     }
 
     &--large {
       padding: var(--space-s) var(--space-m);
+      font-size: clamp-size(var(--font-size-xl), var(--font-size-2xl));
     }
   }
 </style>

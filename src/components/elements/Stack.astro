@@ -8,33 +8,33 @@
 import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
-	class?: string;
-	Element?: keyof HTMLElementTagNameMap;
-	gap?: string;
-	padding?: string;
-	recursive?: boolean;
-	split?: boolean;
-	/**
-	 * アクセシビリティ属性
-	 * 必要に応じてaria属性をサポート
-	 */
-	[key: string]: unknown; // その他の属性を許可
+  class?: string;
+  Element?: keyof HTMLElementTagNameMap;
+  gap?: string;
+  padding?: string;
+  recursive?: boolean;
+  split?: boolean;
+  /**
+   * アクセシビリティ属性
+   * 必要に応じてaria属性をサポート
+   */
+  [key: string]: unknown; // その他の属性を許可
 }
 
 const {
-	class: className,
-	Element = "div",
-	gap,
-	padding,
-	...rest
+  class: className,
+  Element = "div",
+  gap,
+  padding,
+  ...rest
 } = Astro.props as Props;
 
 // 基本コンポーネントに渡すプロパティを準備
 const baseProps = {
-	componentClass: "stack",
-	class: className,
-	Element,
-	...rest,
+  componentClass: "stack",
+  class: className,
+  Element,
+  ...rest,
 };
 
 // gap属性は特別に処理
@@ -43,20 +43,20 @@ const hasMultipleGaps = gap && gap.trim().split(/\s+/).length > 1;
 
 // 複数のギャップ値を処理
 const [mainGap, crossGap] = hasMultipleGaps
-	? gap.trim().split(/\s+/)
-	: [gap, undefined];
+  ? gap.trim().split(/\s+/)
+  : [gap, undefined];
 
 // データ属性を準備
 const dataAttributes = hasMultipleGaps
-	? {
-			"data-stack": true,
-			"data-main-gap": mainGap,
-			"data-cross-gap": crossGap,
-		}
-	: {
-			"data-stack": true,
-			gap,
-		};
+  ? {
+      "data-stack": true,
+      "data-main-gap": mainGap,
+      "data-cross-gap": crossGap,
+    }
+  : {
+      "data-stack": true,
+      gap,
+    };
 ---
 
 <BaseElement padding={padding} {...baseProps} {...dataAttributes}>

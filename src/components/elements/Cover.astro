@@ -7,42 +7,42 @@
 import BaseElement from "./base/BaseElement.astro";
 
 interface Props {
-	class?: string;
-	Element?: keyof HTMLElementTagNameMap;
-	padding?: string;
-	gap?: string;
-	height?: string;
-	centered?: boolean;
-	minHeight?: string;
-	[key: string]: unknown;
+  class?: string;
+  Element?: keyof HTMLElementTagNameMap;
+  padding?: string;
+  gap?: string;
+  height?: string;
+  centered?: boolean;
+  minHeight?: string;
+  [key: string]: unknown;
 }
 
 const {
-	class: className,
-	Element = "div",
-	padding,
-	gap,
-	height,
-	...rest
+  class: className,
+  Element = "div",
+  padding,
+  gap,
+  height,
+  ...rest
 } = Astro.props as Props;
 
 // 基本コンポーネントに渡すプロパティを準備
 const baseProps = {
-	componentClass: "cover",
-	class: className,
-	Element,
-	"data-height": height || null,
-	...rest,
+  componentClass: "cover",
+  class: className,
+  Element,
+  "data-height": height || null,
+  ...rest,
 };
 
 // スロットの中身を確認するためのヘルパー関数
 const hasSlotContent = (slotName: string | null) => {
-	// デフォルトスロット
-	if (slotName === null) {
-		return Astro.slots.has("default");
-	}
-	// 名前付きスロット
-	return Astro.slots.has(slotName);
+  // デフォルトスロット
+  if (slotName === null) {
+    return Astro.slots.has("default");
+  }
+  // 名前付きスロット
+  return Astro.slots.has(slotName);
 };
 
 // 各スロットの存在確認
@@ -76,9 +76,7 @@ const hasBottomSlot = hasSlotContent("bottom");
 </BaseElement>
 
 <style lang="scss">
-  @use "../../styles/tools/mixin" as mix;
-
-  @include mix.element-base("cover") {
+  @include element-base("cover") {
     display: flex;
     flex-direction: column;
     gap: var(--cover-gap, var(--space-m));
@@ -86,8 +84,8 @@ const hasBottomSlot = hasSlotContent("bottom");
 
     --cover-height: attr(data-height type(<length>), 100dvh);
 
-    @include mix.spacing-classes("--cover-padding", "padding");
-    @include mix.two-dimensional-gap(
+    @include spacing-classes("--cover-padding", "padding");
+    @include two-dimensional-gap(
       "--cover-gap",
       "--cover-row-gap",
       "--cover-column-gap"
