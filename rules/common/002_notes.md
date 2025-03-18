@@ -1,22 +1,3 @@
----
-description: 
-globs: 
-alwaysApply: true
----
-
-あなたは高度な問題解決能力を持つAIアシスタントです。
-後に示す指示に従って、効率的かつ正確にタスクを遂行してください。
-
-# このアプリケーションの概要
-
-「astro-template」という、私がastroを使ってプロジェクトを作成する際にこのテンプレートを使って構築をするための雛形です。
-
-## 主な技術スタック
-
-- Astro.js
-- TypeScript
-- scss
-
 ## 実装時の注意点
 
 - 常に既存コードの設計や記法を参考にしてください。
@@ -30,9 +11,3 @@ alwaysApply: true
 - クラスのmain関数が長くなる場合、適切な粒度でメソッドを分割してください。
 - 書籍「リーダブルコード」のようなベストプラクティスを常に適用してください。
 - コードの意図・背景などのコメントを各行に積極的に入れてください。また関数にはJSDocを入れることが推奨されます。
-
-## 参考
-
-- 常に参考すべき普遍的なルール: [common.mdc](mdc:.cursor/rules/common.mdc)
-- コミットメッセージのルール: [commit-message.mdc](mdc:.cursor/rules/commit-message.mdc)
-- フロントエンドのルール: [front-end.mdc](mdc:.cursor/rules/front-end.mdc)
