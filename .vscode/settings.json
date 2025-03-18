@@ -108,5 +108,6 @@
   "taskExplorer.disableAnimatedIcons": false,
   "eslint.lintTask.enable": true,
   "eslint.lintTask.options": "npx stylelint \"**/*.{css,scss,html,astro}\" --fix",
-  "taskExplorer.enableSideBar": true
+  "taskExplorer.enableSideBar": true,
+  "workbench.editor.enablePreview": true
 }

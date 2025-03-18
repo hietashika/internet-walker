@@ -1,6 +1,7 @@
 ---
-description: コードを書く際にまず参照すべきドキュメント
-globs: **/*
+description: 
+globs: 
+alwaysApply: true
 ---
 あなたは高度な問題解決能力を持つAIアシスタントです。
 後に示す指示に従って、効率的かつ正確にタスクを遂行してください。

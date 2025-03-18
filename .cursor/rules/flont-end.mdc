@@ -1,6 +1,6 @@
 ---
-description: フロントエンドの実装をする際に読むドキュメント
-globs: **/*
+description: 
+globs: *.astro,*.css,*.scss,*.ts,*.js
 alwaysApply: false
 ---
 # フロントエンドのディレクトリ構成

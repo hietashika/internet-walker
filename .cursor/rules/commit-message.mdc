@@ -1,8 +1,8 @@
 ---
-description: コミットメッセージを書く際に、参照するドキュメント
-globs: **/*
+description: This file contains rules for writing commit messages. Always refer to this file when thinking of a commit message.
+globs: 
+alwaysApply: false
 ---
-# コミットメッセージのフォーマット
 
 コミットメッセージを頼まれた再に、参考にしてほしい情報を説明します。
 
