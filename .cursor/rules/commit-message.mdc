@@ -1,7 +1,7 @@
 ---
-description: This file contains rules for writing commit messages. Always refer to this file when thinking of a commit message.
+description: 
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 
 # コミットメッセージのフォーマット
@@ -68,7 +68,7 @@ src/content/2025/02/astroStart.md
 ## Emoji
 
 必ず記載してください。  
-絵文字の使い方は[gitmoji](https://gitmoji.dev/)を参照。
+絵文字の使い方は[gitmoji](mdc:https:/gitmoji.dev)を参照。
 
 ### Emojiの使用例
 
