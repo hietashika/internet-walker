@@ -1,3 +1,8 @@
+---
+description: 
+globs: *.astro,*.css,*.scss,*.ts
+alwaysApply: false
+---
 # フロントエンドのルール
 
 フロントエンドを実装する際に、参考にしてほしいルールについて説明します。
@@ -44,31 +49,31 @@ astro-template/
 常にこれらのファイルの記法を参考にして、実装を行ってください。
 
 ### Astro Element
-- [BaseElement.astro](astro:src/components/elements/BaseElement.astro)
+- [BaseElement.astro](mdc:astro:src/components/elements/BaseElement.astro)
   - DRY原則を守り、Elementの実装を共通化する。
-- [Link.astro](astro:src/components/elements/Link.astro)
+- [Link.astro](mdc:astro:src/components/elements/Link.astro)
   - BaseElementを継承して、リンクを表示するためのコンポーネントを作成する。
 
 ### Astro Component
-- [Button.astro](astro:src/components/Button.astro)
+- [Button.astro](mdc:astro:src/components/Button.astro)
   - Elementを継承して、ボタンを表示するためのコンポーネントを作成する。
 
 ### Astro Layout
-- [Layout.astro](astro:src/layouts/Layout.astro)
+- [Layout.astro](mdc:astro:src/layouts/Layout.astro)
   - ページのレイアウトを作成する。
 
 ### Astro Page
-- [Index.astro](astro:src/pages/Index.astro)
+- [Index.astro](mdc:astro:src/pages/Index.astro)
   - ホームページを作成する。
 
 ### Astro Style
-- [global.scss](astro:src/styles/global.scss)
+- [global.scss](mdc:astro:src/styles/global.scss)
   - グローバルなスタイルを定義する。
   - ITCSSを採用して、スタイルを管理する。
 
 ## フロントエンドのコーディング規約
 
-常に[Astroの公式ドキュメント](https://docs.astro.build/en/getting-started/)を参照し、ベストプラクティスな実装を行う。
+常に[Astroの公式ドキュメント](mdc:https:/docs.astro.build/en/getting-started)を参照し、ベストプラクティスな実装を行う。
 
 ## html
 
@@ -96,7 +101,7 @@ MindBEMdingの考え方を採用しています。
 
 ### カスケードレイヤー
 ITCSSの設計思想に基づいて、カスケードレイヤーを採用しています。 
-カスケードレイヤーの設定は、[global.scss](astro:src/styles/global.scss)に記載しています。
+カスケードレイヤーの設定は、[global.scss](mdc:astro:src/styles/global.scss)に記載しています。
 1. Settings - グローバル変数や設定（例：色、フォントサイズなど）
 2. Tools - ミックスインや関数（例：メディアクエリ、ユーティリティ関数など）
 3. Generic - リセットやノーマライズ（例：reset.css）
@@ -113,7 +118,7 @@ EveryLayoutや、CSS Gridを活用してください。
 
 ### レスポンシブタイポグラフィ
 
-このプロジェクトでは、レスポンシブなタイポグラフィを実装するために`clamp-size`ミックスインを使用します。 [_function.scss](astro:src/styles/tools/_function.scss)
+このプロジェクトでは、レスポンシブなタイポグラフィを実装するために`clamp-size`ミックスインを使用します。 [_function.scss](mdc:astro:src/styles/tools/_function.scss)
 
 
 
@@ -125,4 +130,4 @@ EveryLayoutや、CSS Gridを活用してください。
 
 ### Reference
 
-[Astro 公式ドキュメント](https://astro.build/docs/)
+[Astro 公式ドキュメント](mdc:https:/astro.build/docs)
