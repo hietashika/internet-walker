@@ -1,21 +1,48 @@
 ---
 interface Props {
-	pageTitle: string;
+  pageTitle: string;
+  pageDescription?: string;
 }
 
-const { pageTitle } = Astro.props;
-const siteTitle = "My Astro Site";
+const { pageTitle, pageDescription } = Astro.props;
+const siteTitle = "InternetWalker";
+const defaultDescription =
+  "インターネットを通じて学んだことや、その他の情報を記録するブログサイトです。";
+const description = pageDescription || defaultDescription;
 ---
-<!-- フォントの読み込み -->
-<!-- preconnectの指定 -->
+
+<!-- フォントの読み込み --><!-- preconnectの指定 -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <!-- フォントのスタイルシートを可能な限り事前に読み込む -->
-<link rel="preload" as="style" fetchpriority="high" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP&display=swap" />
+<link
+  rel="preload"
+  as="style"
+  fetchpriority="high"
+  href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP&display=swap"
+/>
 <!-- フォントが読み込まれるのを待ってからWebページに適応させる -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDGothic&display=swap" media="print" onload='this.media="all"' />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=BIZ+UDGothic&display=swap"
+  media="print"
+  onload='this.media="all"'
+/>
 
-
+<!-- Meta情報 -->
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="generator" content={Astro.generator} />
+<meta name="description" content={description} />
+<meta
+  name="keywords"
+  content="ブログ,インターネット,技術,学習,記録,プログラミング"
+/>
+<meta name="author" content="InternetWalker" />
+
+<!-- OGP設定 -->
+<meta property="og:title" content={`${pageTitle} | ${siteTitle}`} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={siteTitle} />
+
 <title>{pageTitle} | {siteTitle}</title>
