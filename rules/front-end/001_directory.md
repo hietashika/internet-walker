@@ -1,6 +1,5 @@
 ## フロントエンドのディレクトリ構成
-{ここに設計思想を記載}
-{ex: 設計思想として、ドメイン駆動開発とオニオンアーキテクチャを採用しています。}
+Astroをベースとしたコンポーネント指向の設計を採用しています。再利用可能なUIコンポーネントとレイアウトプリミティブを組み合わせて効率的な開発を実現します。
 
 ```
 astro-template/
@@ -8,29 +7,34 @@ astro-template/
 │   └── favicon.svg
 ├── src/
 │   ├── components/ # 再利用可能なUIコンポーネント
-│   │   ├── ui/ # 汎用的なUIコンポーネント（ボタン、カード、入力フォームなど）
-│   │   ├── layout/ # レイアウト関連コンポーネント（ヘッダー、フッター、サイドバーなど）
-│   │   └── feature/ # 特定機能に関連するコンポーネント
+│   │   ├── elements/ # レイアウトプリミティブ（Box, Stack, Cluster等）
+│   │   │   └── base/ # 基本要素
+│   │   ├── Button.astro # 汎用的なUIコンポーネント
+│   │   ├── Header.astro # ヘッダーコンポーネント
+│   │   ├── Footer.astro # フッターコンポーネント
+│   │   ├── Section.astro # セクションコンポーネント
+│   │   └── Welcome.astro # ウェルカムコンポーネント
 │   ├── layouts/ # ページレイアウト
-│   │   └── Layout.astro
+│   │   └── Layout.astro # 基本レイアウト
 │   ├── pages/ # ルーティング用ページ
-│   │   └── index.astro
-│   ├── styles/ # グローバルスタイル、変数、ミックスイン
-│   │   ├── variables.scss # 変数定義
-│   │   ├── mixins.scss # ミックスイン
-│   │   ├── components.scss # コンポーネント共通スタイル
-│   │   ├── reset.css # リセットCSS
-│   │   └── global.scss # グローバルスタイル
+│   │   ├── index.astro # ホームページ
+│   │   └── test.astro # テストページ
+│   ├── styles/ # ITCSSに基づくスタイル構成
+│   │   ├── settings/ # 変数や設定
+│   │   │   └── _variables.scss # カラー、フォント、スペーシング等の変数
+│   │   ├── tools/ # ミックスインや関数
+│   │   │   └── _function.scss # レスポンシブ関数等
+│   │   ├── generic/ # リセットやノーマライズ
+│   │   │   └── _reset.css # リセットCSS(destyle.css)
+│   │   ├── elements/ # HTML要素の基本スタイル
+│   │   │   └── _base.scss # ベーススタイル
+│   │   └── global.scss # グローバルスタイルとレイヤー定義
 │   ├── utils/ # ユーティリティ関数
-│   │   ├── media.ts # メディアクエリ関連
-│   │   ├── spacing.ts # スペーシング制御用ヘルパー関数
-│   │   └── i18n/ # 国際化ユーティリティ（将来的な拡張用）
+│   │   └── spacing.ts # スペーシング制御用ヘルパー関数
 │   └── assets/ # 静的アセット（画像、フォントなど）
-│       ├── astro.svg
-│       └── background.svg
 ├── astro.config.mjs # Astro設定ファイル
 ├── package.json # プロジェクト依存関係
-├── tsconfig.json # TypeScriptの設定やsrc内で頻繁に使用するディレクトリのパスエイリアス
+├── tsconfig.json # TypeScript設定
 └── README.md # プロジェクトドキュメント
 ```
 
